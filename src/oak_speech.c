@@ -1347,7 +1347,7 @@ static void Task_OakSpeech_LoadPlayerPic(u8 taskId)
     if (gSaveBlock2Ptr->playerGender == MALE)
         LoadTrainerPic(MALE_PLAYER_PIC, 0);
     else
-        LoadTrainerPic(FEMALE_PLAYER_PIC, 0);
+        LoadTrainerPic(MALE_PLAYER_PIC, 0);
     CreateFadeOutTask(taskId, 2);
     gTasks[taskId].tTimer = 32;
     gTasks[taskId].func = Task_OakSpeech_YourNameWhatIsIt;
@@ -1366,8 +1366,9 @@ static void Task_OakSpeech_YourNameWhatIsIt(u8 taskId)
         else
         {
             tTrainerPicPosX = 0;
-            OakSpeechPrintMessage(gOakSpeech_Text_YourNameWhatIsIt, sOakSpeechResources->textSpeed, FALSE);
-            gTasks[taskId].func = Task_OakSpeech_FadeOutForPlayerNamingScreen;
+            sOakSpeechResources->hasPlayerBeenNamed = FALSE;
+            GetDefaultName(sOakSpeechResources->hasPlayerBeenNamed, 0);
+            gTasks[taskId].func = Task_OakSpeech_ConfirmName;
         }
     }
 }
@@ -1465,17 +1466,24 @@ static void Task_OakSpeech_DoNamingScreen(u8 taskId)
 static void Task_OakSpeech_ConfirmName(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if (!gPaletteFade.active)
+    if (TRUE)
     {
+        tNameNotConfirmed= TRUE;
         if (tNameNotConfirmed == TRUE)
         {
             if (sOakSpeechResources->hasPlayerBeenNamed == FALSE)
+            {
                 StringExpandPlaceholders(gStringVar4, gOakSpeech_Text_SoYourNameIsPlayer);
+                OakSpeechPrintMessage(gStringVar4, sOakSpeechResources->textSpeed, TRUE);
+                gTasks[taskId].func = Task_OakSpeech_FadeOutPlayerPic;
+            }
             else
+            {
                 StringExpandPlaceholders(gStringVar4, gOakSpeech_Text_ConfirmRivalName);
-            OakSpeechPrintMessage(gStringVar4, sOakSpeechResources->textSpeed, TRUE);
-            tNameNotConfirmed = FALSE;
-            tTimer = 25;
+                OakSpeechPrintMessage(gStringVar4, sOakSpeechResources->textSpeed, TRUE);
+                tNameNotConfirmed = FALSE;
+                tTimer = 25;
+            }
         }
         else if (!IsTextPrinterActiveOnWindow(WIN_INTRO_TEXTBOX))
         {
@@ -1527,14 +1535,17 @@ static void Task_OakSpeech_HandleConfirmNameInput(u8 taskId)
 static void Task_OakSpeech_FadeOutPlayerPic(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-
-    if (tTrainerPicFadeState != 0)
+    if (!IsTextPrinterActiveOnWindow(WIN_INTRO_TEXTBOX))
     {
-        ClearTrainerPic();
-        if (tTimer != 0)
-            tTimer--;
-        else
-            gTasks[taskId].func = Task_OakSpeech_FadeInRivalPic;
+        ClearDialogWindowAndFrame(WIN_INTRO_TEXTBOX, TRUE);
+        if (tTrainerPicFadeState != 0)
+        {
+            ClearTrainerPic();
+            if (tTimer != 0)
+                tTimer--;
+            else
+                gTasks[taskId].func = Task_OakSpeech_FadeInRivalPic;
+        }
     }
 }
 
@@ -1564,9 +1575,11 @@ static void Task_OakSpeech_AskRivalsName(u8 taskId)
 
     if (tTrainerPicFadeState != 0)
     {
-        OakSpeechPrintMessage(gOakSpeech_Text_WhatWasHisName, sOakSpeechResources->textSpeed, FALSE);
         sOakSpeechResources->hasPlayerBeenNamed = TRUE;
-        gTasks[taskId].func = Task_OakSpeech_MoveRivalDisplayNameOptions;
+        GetDefaultName(sOakSpeechResources->hasPlayerBeenNamed, 0);
+        StringExpandPlaceholders(gStringVar4, gOakSpeech_Text_WhatWasHisName);
+        OakSpeechPrintMessage(gStringVar4, sOakSpeechResources->textSpeed, TRUE);
+        gTasks[taskId].func = Task_OakSpeech_FadeOutRivalPic;
     }
 }
 
@@ -1586,7 +1599,7 @@ static void Task_OakSpeech_ReshowPlayersPic(u8 taskId)
             if (gSaveBlock2Ptr->playerGender == MALE)
                 LoadTrainerPic(MALE_PLAYER_PIC, 0);
             else
-                LoadTrainerPic(FEMALE_PLAYER_PIC, 0);
+                LoadTrainerPic(MALE_PLAYER_PIC, 0);
             gTasks[taskId].tTrainerPicPosX = 0;
             gSpriteCoordOffsetX = 0;
             ChangeBgX(2, 0, BG_COORD_SET);
@@ -1857,7 +1870,7 @@ static void CB2_ReturnFromNamingScreen(void)
             if (gSaveBlock2Ptr->playerGender == MALE)
                 LoadTrainerPic(MALE_PLAYER_PIC, 0);
             else
-                LoadTrainerPic(FEMALE_PLAYER_PIC, 0);
+                LoadTrainerPic(MALE_PLAYER_PIC, 0);
         }
         else
         {
@@ -2148,14 +2161,17 @@ static void GetDefaultName(u8 hasPlayerBeenNamed, u8 nameChoice)
     if (hasPlayerBeenNamed == FALSE)
     {
         if (gSaveBlock2Ptr->playerGender == MALE)
-            src = sMaleNameChoices[Random() % ARRAY_COUNT(sMaleNameChoices)];
+            src = gNameChoice_Juan;
         else
-            src = sFemaleNameChoices[Random() % ARRAY_COUNT(sFemaleNameChoices)];
+            src = gNameChoice_Santi;
         dest = gSaveBlock2Ptr->playerName;
     }
     else
     {
-        src = sRivalNameChoices[nameChoice];
+        if (gSaveBlock2Ptr->playerGender == MALE)
+            src = gNameChoice_Santi;
+        else
+            src = gNameChoice_Juan;
         dest = gSaveBlock1Ptr->rivalName;
     }
     for (i = 0; i < PLAYER_NAME_LENGTH && src[i] != EOS; i++)
