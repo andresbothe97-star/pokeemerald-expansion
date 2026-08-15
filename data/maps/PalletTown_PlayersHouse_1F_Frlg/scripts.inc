@@ -62,7 +62,7 @@ PalletTown_PlayersHouse_1F_Text_AllBoysLeaveOakLookingForYou::
 
 PalletTown_PlayersHouse_1F_Text_AllGirlsLeaveOakLookingForYou::
 	.string "MOM: …Right.\n"
-	.string "All girls dream of traveling.\l"
+	.string "All boys leave home someday.\l"
 	.string "It said so on TV.\p"
 	.string "Oh, yes. PROF. OAK, next door, was\n"
 	.string "looking for you.$"

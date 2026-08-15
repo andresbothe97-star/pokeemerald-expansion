@@ -93,7 +93,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable::
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable::
 	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_ROCKER, 4, 6
-	setobjectmovementtype LOCALID_TRAINER_FAN_CLUB_ROCKER, MOVEMENT_TYPE_FACE_UP
+	setobjectmovementtype LOCALID_TRAINER_FAN_CLUB_ROCKER, MOVEMENT_TYPE_FACE_LEFT
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember6ToFarTable::

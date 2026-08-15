@@ -1,0 +1,47 @@
+mapscripts PalletTown_TitosHouse_MapScripts {}
+
+script PalletTown_Tito_WhereIsPJ {
+    lockall
+    msgbox("Tito: Have you seen PJ?\n"
+           "I can't seem to find him anywhere.\n"
+           "I hope he's not lost.")
+    releaseall
+}
+
+script PalletTown_Tito_RomHack {
+    lockall
+    msgbox("Woah!\n"
+           "This rom hack took how many hours??")
+    releaseall
+}
+
+script PalletTown_EventScript_SecretMon {
+    lockall
+    if (var(VAR_0x408C) == 2) {
+        msgbox("It really is empty now.")
+        } elif (var(VAR_0x408C) == 0) {
+            msgbox("Looks like an empty cabinet.")
+            setvar(VAR_0x408C, 1)
+            } else {
+                msgbox("Looks like a Poke Ball is wedged inside!\n"
+                       "Would you like to take it out?", MSGBOX_YESNO)
+                if (var(VAR_RESULT) == 1) {
+                    givemon(SPECIES_MEOWTH_GALAR, 5)
+                    if (var(VAR_RESULT) == MON_GIVEN_TO_PARTY) {
+                        playfanfare(MUS_OBTAIN_ITEM)
+                        msgbox("You received a Galarian Meowth!")
+                        setvar(VAR_0x408C, 2)
+                    }
+                    elif (var(VAR_RESULT) == MON_GIVEN_TO_PC) {
+                        playfanfare(MUS_OBTAIN_ITEM)
+                        msgbox("Your party is full.\n"
+                               "The Pokemon was sent to your PC.")
+                        setvar(VAR_0x408C, 2)
+                    }
+                } else {
+                    msgbox("Better to leave the Ball in the cabinet.")
+                }
+            }
+    releaseall
+}
+
