@@ -248,6 +248,10 @@ Route22_Text_EarlyRivalDefeat::
 	.string "Awww!\n"
 	.string "You just lucked out!$"
 
+Text_RivalVictory::
+	.string "Haha!\n"
+	.string "You just got smacked!$"
+
 Route22_Text_EarlyRivalPostBattle::
 	.string "I heard the POKéMON LEAGUE is\n"
 	.string "crawling with tough TRAINERS.\p"

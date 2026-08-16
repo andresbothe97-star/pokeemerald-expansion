@@ -1,0 +1,239 @@
+raw `
+.equ PLAYER_STARTER_NUM,      VAR_TEMP_1
+.equ PLAYER_STARTER_SPECIES,  VAR_TEMP_2
+.equ RIVAL_STARTER_SPECIES,   VAR_TEMP_3
+`
+mapscripts PalletTown_ProfessorOaksLab_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: PalletTown_ProfessorOaksLab_OnTransition
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 0: Get_Ready_To_Move
+    ]
+}
+
+script PalletTown_ProfessorOaksLab_OnTransition {
+    setflag(FLAG_VISITED_OAKS_LAB)
+    if(var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 0) {
+        setobjectxy(LOCALID_OAKS_LAB_PROF_OAK, 6, 11)
+        clearflag(FLAG_HIDE_OAK_IN_HIS_LAB)
+    }
+}
+
+script Get_Ready_To_Move {
+    applymovement(LOCALID_OAKS_LAB_PROF_OAK, MOVEMENT_OAK_ENTRANCE_SCENE)
+    waitmovement(LOCALID_OAKS_LAB_PROF_OAK)
+
+    setobjectxy(LOCALID_OAKS_LAB_PROF_OAK, 6, 3)
+    applymovement(LOCALID_OAKS_LAB_PROF_OAK, MOVEMENT_OAK_POSITIONING)
+    setvar(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1)
+}
+
+movement MOVEMENT_OAK_ENTRANCE_SCENE {
+    walk_up * 5
+}
+
+movement MOVEMENT_OAK_POSITIONING {
+    face_down
+}
+
+script PalletTown_ProfessorOaksLab_EventScript_ProfOak {
+    lockall
+    faceplayer
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 1) {
+        goto(Starter_Dialogue)
+    }
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 2) {
+        goto(Go_On_Pick)
+    }
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 4) {
+        goto(Make_Me_Proud)
+    }
+releaseall
+}
+
+script Starter_Dialogue {
+
+    lockall
+    msgbox("Hans: {PLAYER}!\n"
+           "I think you're finally old enough.\p"
+           "Now that you're in your 30s,\n"
+           "you need your very own Pokemon!\p"
+           "{RIVAL} was up before you\n"
+           "and Tito has PJ.\p"
+           "So they already have their Pokemon.\n"
+           "But please, take your pick!\n")
+    setvar(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2)
+    releaseall
+}
+
+script Go_On_Pick{
+    lockall
+    msgbox("Go on! Take a pick!")
+    releaseall
+}
+
+script Lastly_Dialogue{
+    lockall
+    applymovement(LOCALID_OAKS_LAB_PROF_OAK, Common_Movement_WalkInPlaceFasterDown)
+    applymovement(LOCALID_OAKS_LAB_PROF_OAK, Common_Movement_ExclamationMark)
+    waitmovement(LOCALID_OAKS_LAB_PROF_OAK)
+    msgbox("Hans: Oh! I have one more gift for you!\p"
+           "Take a look inside that box next me.")
+    releaseall
+
+}
+
+
+
+script PalletTown_ProfessorOaksLab_EventScript_BulbasaurBall {
+    lockall
+    if(var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) != 2){
+        goto(Balls_On_Table)
+    }
+    showmonpic(SPECIES_BULBASAUR, 10,3)
+    msgbox("Ahh, I see you've chosen Bulbasaur!")
+    waitmessage
+    setvar(PLAYER_STARTER_NUM, 0)
+	setvar(PLAYER_STARTER_SPECIES, SPECIES_BULBASAUR)
+    goto(Starter_Confirmation_Scene)
+}
+
+script PalletTown_ProfessorOaksLab_EventScript_SquirtleBall {
+    lockall
+    if(var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) != 2){
+        goto(Balls_On_Table)
+    }
+    showmonpic(SPECIES_SQUIRTLE, 10,3)
+    msgbox ("Ahh, I see you've chosen Squirtle!")
+    setvar(PLAYER_STARTER_NUM, 1)
+	setvar(PLAYER_STARTER_SPECIES, SPECIES_SQUIRTLE)
+    goto(Starter_Confirmation_Scene)
+    
+}
+
+script PalletTown_ProfessorOaksLab_EventScript_CharmanderBall {
+    lockall
+    if(var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) != 2){
+        goto(Balls_On_Table)
+    }
+    showmonpic(SPECIES_CHARMANDER, 10,3)
+    msgbox("Ahh, I see you've chosen Charmander!")
+    setvar(PLAYER_STARTER_NUM, 2)
+	setvar(PLAYER_STARTER_SPECIES, SPECIES_CHARMANDER)
+    goto(Starter_Confirmation_Scene)
+}
+
+script Starter_Confirmation_Scene {
+    lockall
+    msgbox ("Hans: So this is the one you want, eh?", MSGBOX_YESNO)
+    if(var(VAR_RESULT) == 1){
+        givemon(PLAYER_STARTER_SPECIES, 10)
+        setvar(RIVAL_STARTER_SPECIES, SPECIES_MILTANK)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received the Pokemon!")
+            removeobject(VAR_LAST_TALKED)
+            call(Disappear)
+            call(NicknamePartyMon)
+            setvar(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3)
+            goto(Lastly_Dialogue)
+        }
+        elif(var(VAR_RESULT) == MON_GIVEN_TO_PC){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received the Pokemon!")
+            removeobject(VAR_LAST_TALKED)
+            call(Disappear)
+            call(NicknameBoxMon)
+            setvar(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3)
+            goto(Lastly_Dialogue)
+        }
+        else{
+            hidemonpic
+            msgbox("No more Room.")
+        }         
+    }
+    else{
+        hidemonpic
+        msgbox("Okay, so not that one?")
+    }
+    waitmessage
+    releaseall
+    end
+}
+
+script Disappear {
+    if(var(VAR_LAST_TALKED) == LOCALID_CHARMANDER_BALL) {
+        setflag(FLAG_HIDE_CHARMANDER_BALL)
+        return
+    }
+    if(var(VAR_LAST_TALKED) == LOCALID_BULBASAUR_BALL) {
+        setflag(FLAG_HIDE_BULBASAUR_BALL)
+        return
+    }
+    if(var(VAR_LAST_TALKED) == LOCALID_SQUIRTLE_BALL) {
+        setflag(FLAG_HIDE_SQUIRTLE_BALL)
+        return
+    }
+    return
+    
+}
+
+script NicknamePartyMon{
+    msgbox("Give it a nickname?", MSGBOX_YESNO)
+    hidemonpic
+    if(var(VAR_RESULT) == 1){
+        call(Common_EventScript_GetGiftMonPartySlot)
+        call(Common_EventScript_NameReceivedPartyMon)
+    }
+}
+
+script NicknameBoxMon{
+    msgbox("Give it a nickname?", MSGBOX_YESNO)
+    hidemonpic
+    if(var(VAR_RESULT) == 1){
+        call(Common_EventScript_NameReceivedBoxMon)
+    }
+    call(Common_EventScript_TransferredToPC)
+}
+
+script Balls_On_Table {
+    lockall
+    msgbox("A dusty pokeball on the table.")
+    releaseall
+}
+
+script Balls_And_Dexes{
+    lockall
+    if(var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) != 3){
+        msgbox("A simple cardboard box.")
+        releaseall
+        end
+    }
+    if(var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 3){
+        msgbox("A Pokedex, running shoes and map!")
+        playfanfare(MUS_RG_OBTAIN_KEY_ITEM)
+        setflag(FLAG_SYS_POKEDEX_GET)
+        setflag(FLAG_SYS_POKEMON_GET)
+        setflag(FLAG_SYS_B_DASH)
+        setvar(VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2)
+        setvar(VAR_MAP_SCENE_ROUTE22, 1)
+        special(SetUnlockedPokedexFlags)
+        special(EnableNationalPokedex)
+        giveitem(ITEM_TOWN_MAP)
+        giveitem_msg("And 30 Pokeballs!", ITEM_POKE_BALL, 30)
+        setvar(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 4)
+        goto(Final_Dialogue)
+    }
+}
+
+script Final_Dialogue {
+    lockall
+    msgbox("Hans: I hope these little trifles\n"
+           "can help you on your adventure!\n")
+    releaseall
+}
+
+script Make_Me_Proud{
+    lockall
+    msgbox("Hans: Go on and have an adventure!\n")
+    releaseall
+}

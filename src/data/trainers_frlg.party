@@ -4530,11 +4530,11 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 - Tackle
 - Sand Attack
 
-Charmander
+Miltank
 Level: 9
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
-- Scratch
-- Growl
+- Stomp
+- Milk Drink
 
 === TRAINER_RIVAL_CERULEAN_SQUIRTLE ===
 Name: TERRY

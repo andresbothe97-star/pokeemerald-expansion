@@ -97,7 +97,6 @@ ViridianCity_EventScript_OldManGymLeaderReturned::
 ViridianCity_EventScript_TutorialOldMan::
 	lock
 	faceplayer
-	goto_if_set FLAG_BADGE01_GET, ViridianCity_EventScript_AskIfTeachyTVHelpful
 	goto_if_ge VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2, ViridianCity_EventScript_TutorialCompleted
 	goto_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1, ViridianCity_EventScript_TutorialStart
 	goto_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0, ViridianCity_EventScript_TutorialNotReady
@@ -188,14 +187,9 @@ ViridianCity_EventScript_RoadBlocked::
 	textcolor NPC_TEXT_COLOR_MALE
 	msgbox ViridianCity_Text_ThisIsPrivateProperty
 	closemessage
-	applymovement LOCALID_PLAYER, ViridianCity_Movement_WalkDown
-	waitmovement 0
+	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2
 	releaseall
 	end
-
-ViridianCity_Movement_WalkDown::
-	walk_down
-	step_end
 
 ViridianCity_EventScript_TutorialTriggerLeft::
 	lockall
@@ -273,7 +267,8 @@ ViridianCity_Text_GoShoppingInPewterOccasionally::
 ViridianCity_Text_ThisIsPrivateProperty::
 	.string "I absolutely forbid you from\n"
 	.string "going through here!\p"
-	.string "This is private property!$"
+	.string "Just Kidding!\n"
+	.string "Imagine if I made you watch a cutscene!\p"
 
 ViridianCity_Text_ShowYouHowToCatchMons::
 	.string "Well, now, I've had my coffee, and\n"
@@ -304,28 +299,16 @@ ViridianCity_Text_WatchThatToLearnBasics::
 	.string "of being a POKéMON TRAINER.$"
 
 ViridianCity_Text_WeakenMonsFirstToCatch::
-	.string "Well, now, I've had my coffee, and\n"
-	.string "that's what I need to get going!\p"
-	.string "But I made it too strong.\n"
-	.string "It gave me a headache…\p"
-	.string "Incidentally, are you filling your\n"
-	.string "POKéDEX?\p"
-	.string "At first, focus on weakening the\n"
-	.string "POKéMON before trying to catch it.$"
+	.string "I absolutely forbid you from\n"
+	.string "going through here!\p"
+	.string "Just Kidding!\n"
+	.string "Imagine if I made you watch a cutscene!\p"
 
 ViridianCity_Text_HowsTeachyTVHelping::
-	.string "Well, now, I've had my coffee, and\n"
-	.string "that's what I need to get going!\p"
-	.string "But I made it too strong.\n"
-	.string "It gave me a headache…\p"
-	.string "Incidentally, is my old TEACHY TV\n"
-	.string "helping you?$"
+	.string "Hahaha...unless..?\n"
 
 ViridianCity_Text_MyGrandsonOnTheShow::
-	.string "Wahaha!\n"
-	.string "It's my grandson on the show!\p"
-	.string "Since he's the one doing the\n"
-	.string "teaching, you're bound to learn.$"
+	.string "Wahaha!$"
 
 ViridianCity_Text_TooBusyForTeachyTV::
 	.string "Hm… You're too busy to not even\n"

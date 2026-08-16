@@ -5,6 +5,7 @@ ViridianCity_Mart_Frlg_MapScripts::
 
 ViridianCity_Mart_OnLoad::
 	goto_if_unset FLAG_SYS_POKEDEX_GET, ViridianCity_Mart_EventScript_HideQuestionnaire
+	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 2
 	end
 
 ViridianCity_Mart_EventScript_HideQuestionnaire::
@@ -29,7 +30,6 @@ ViridianCity_Mart_EventScript_ParcelScene::
 	msgbox ViridianCity_Mart_Text_TakeThisToProfOak
 	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1
 	giveitem_msg ViridianCity_Mart_Text_ReceivedOaksParcelFromClerk, ITEM_OAKS_PARCEL, 1, MUS_RG_OBTAIN_KEY_ITEM
-	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 5
 	releaseall
 	end
 

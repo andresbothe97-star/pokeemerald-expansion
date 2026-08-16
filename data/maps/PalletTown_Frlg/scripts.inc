@@ -371,7 +371,7 @@ PalletTown_EventScript_OakTrigger::
 # 186 "data/maps/PalletTown_Frlg/scripts.pory"
 	waitdooranim
 # 187 "data/maps/PalletTown_Frlg/scripts.pory"
-	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1
+	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 0
 # 188 "data/maps/PalletTown_Frlg/scripts.pory"
 	clearflag FLAG_HIDE_OAK_IN_HIS_LAB
 # 189 "data/maps/PalletTown_Frlg/scripts.pory"
