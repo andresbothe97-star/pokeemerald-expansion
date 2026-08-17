@@ -13,8 +13,7 @@ mapscripts PalletTown_ProfessorOaksLab_Frlg_MapScripts {
 script PalletTown_ProfessorOaksLab_OnTransition {
     setflag(FLAG_VISITED_OAKS_LAB)
     if(var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 0) {
-        setobjectxy(LOCALID_OAKS_LAB_PROF_OAK, 6, 11)
-        clearflag(FLAG_HIDE_OAK_IN_HIS_LAB)
+        setobjectxyperm(LOCALID_OAKS_LAB_PROF_OAK, 6, 11)
     }
 }
 
@@ -22,13 +21,14 @@ script Get_Ready_To_Move {
     applymovement(LOCALID_OAKS_LAB_PROF_OAK, MOVEMENT_OAK_ENTRANCE_SCENE)
     waitmovement(LOCALID_OAKS_LAB_PROF_OAK)
 
-    setobjectxy(LOCALID_OAKS_LAB_PROF_OAK, 6, 3)
+    setobjectxyperm(LOCALID_OAKS_LAB_PROF_OAK, 6, 3)
     applymovement(LOCALID_OAKS_LAB_PROF_OAK, MOVEMENT_OAK_POSITIONING)
     setvar(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1)
 }
 
 movement MOVEMENT_OAK_ENTRANCE_SCENE {
-    walk_up * 5
+    walk_up * 8
+    face_down
 }
 
 movement MOVEMENT_OAK_POSITIONING {
@@ -74,6 +74,7 @@ script Go_On_Pick{
 script Lastly_Dialogue{
     lockall
     applymovement(LOCALID_OAKS_LAB_PROF_OAK, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(LOCALID_OAKS_LAB_PROF_OAK)
     applymovement(LOCALID_OAKS_LAB_PROF_OAK, Common_Movement_ExclamationMark)
     waitmovement(LOCALID_OAKS_LAB_PROF_OAK)
     msgbox("Hans: Oh! I have one more gift for you!\p"
@@ -91,7 +92,6 @@ script PalletTown_ProfessorOaksLab_EventScript_BulbasaurBall {
     }
     showmonpic(SPECIES_BULBASAUR, 10,3)
     msgbox("Ahh, I see you've chosen Bulbasaur!")
-    waitmessage
     setvar(PLAYER_STARTER_NUM, 0)
 	setvar(PLAYER_STARTER_SPECIES, SPECIES_BULBASAUR)
     goto(Starter_Confirmation_Scene)
@@ -103,7 +103,7 @@ script PalletTown_ProfessorOaksLab_EventScript_SquirtleBall {
         goto(Balls_On_Table)
     }
     showmonpic(SPECIES_SQUIRTLE, 10,3)
-    msgbox ("Ahh, I see you've chosen Squirtle!")
+    msgbox("Ahh, I see you've chosen Squirtle!")
     setvar(PLAYER_STARTER_NUM, 1)
 	setvar(PLAYER_STARTER_SPECIES, SPECIES_SQUIRTLE)
     goto(Starter_Confirmation_Scene)

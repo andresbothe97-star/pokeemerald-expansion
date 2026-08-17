@@ -30,38 +30,44 @@ PalletTown_ProfessorOaksLab_OnTransition::
 
 PalletTown_ProfessorOaksLab_OnTransition_1:
 # 16 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
-	setobjectxy LOCALID_OAKS_LAB_PROF_OAK, 6, 11
-# 17 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
-	clearflag FLAG_HIDE_OAK_IN_HIS_LAB
+	setobjectxyperm LOCALID_OAKS_LAB_PROF_OAK, 6, 11
 	return
 
 
 Get_Ready_To_Move::
-# 22 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
+# 21 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
 	applymovement LOCALID_OAKS_LAB_PROF_OAK, MOVEMENT_OAK_ENTRANCE_SCENE
-# 23 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
+# 22 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
 	waitmovement LOCALID_OAKS_LAB_PROF_OAK
+# 24 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
+	setobjectxyperm LOCALID_OAKS_LAB_PROF_OAK, 6, 3
 # 25 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
-	setobjectxy LOCALID_OAKS_LAB_PROF_OAK, 6, 3
-# 26 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
 	applymovement LOCALID_OAKS_LAB_PROF_OAK, MOVEMENT_OAK_POSITIONING
-# 27 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
+# 26 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1
 	return
 
 
-# 30 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
+# 29 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
 MOVEMENT_OAK_ENTRANCE_SCENE:
-# 31 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
+# 30 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
+	walk_up
+# 30 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
+	walk_up
+# 30 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
+	walk_up
+# 30 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
+	walk_up
+# 30 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
+	walk_up
+# 30 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
+	walk_up
+# 30 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
+	walk_up
+# 30 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
 	walk_up
 # 31 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
-	walk_up
-# 31 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
-	walk_up
-# 31 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
-	walk_up
-# 31 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
-	walk_up
+	face_down
 	step_end
 
 # 34 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
@@ -135,29 +141,29 @@ Lastly_Dialogue::
 # 76 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
 	applymovement LOCALID_OAKS_LAB_PROF_OAK, Common_Movement_WalkInPlaceFasterDown
 # 77 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
-	applymovement LOCALID_OAKS_LAB_PROF_OAK, Common_Movement_ExclamationMark
-# 78 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
 	waitmovement LOCALID_OAKS_LAB_PROF_OAK
+# 78 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
+	applymovement LOCALID_OAKS_LAB_PROF_OAK, Common_Movement_ExclamationMark
 # 79 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
+	waitmovement LOCALID_OAKS_LAB_PROF_OAK
+# 80 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
 	msgbox Lastly_Dialogue_Text_0
-# 81 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
+# 82 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
 	releaseall
 	return
 
 
 PalletTown_ProfessorOaksLab_EventScript_BulbasaurBall::
-# 88 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
-	lockall
 # 89 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
+	lockall
+# 90 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
 	compare VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2
 	goto_if_ne PalletTown_ProfessorOaksLab_EventScript_BulbasaurBall_2
 PalletTown_ProfessorOaksLab_EventScript_BulbasaurBall_1:
-# 92 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
-	showmonpic SPECIES_BULBASAUR, 10, 3
 # 93 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
-	msgbox PalletTown_ProfessorOaksLab_EventScript_BulbasaurBall_Text_0
+	showmonpic SPECIES_BULBASAUR, 10, 3
 # 94 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
-	waitmessage
+	msgbox PalletTown_ProfessorOaksLab_EventScript_BulbasaurBall_Text_0
 # 95 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
 	setvar PLAYER_STARTER_NUM, 0
 # 96 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
@@ -167,7 +173,7 @@ PalletTown_ProfessorOaksLab_EventScript_BulbasaurBall_1:
 	return
 
 PalletTown_ProfessorOaksLab_EventScript_BulbasaurBall_2:
-# 90 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
+# 91 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
 	goto Balls_On_Table
 	goto PalletTown_ProfessorOaksLab_EventScript_BulbasaurBall_1
 
@@ -452,12 +458,12 @@ Go_On_Pick_Text_0:
 	.string "Go on! Take a pick!$"
 
 Lastly_Dialogue_Text_0:
-# 79 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
+# 80 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
 	.string "Hans: Oh! I have one more gift for you!\p"
 	.string "Take a look inside that box next me.$"
 
 PalletTown_ProfessorOaksLab_EventScript_BulbasaurBall_Text_0:
-# 93 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
+# 94 "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.pory"
 	.string "Ahh, I see you've chosen Bulbasaur!$"
 
 PalletTown_ProfessorOaksLab_EventScript_SquirtleBall_Text_0:
