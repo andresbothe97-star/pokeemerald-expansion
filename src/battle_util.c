@@ -38,6 +38,7 @@
 #include "malloc.h"
 #include "berry.h"
 #include "pokedex.h"
+#include "pokemon.h"
 #include "mail.h"
 #include "field_weather.h"
 #include "constants/abilities.h"
@@ -11057,6 +11058,10 @@ void SetValuesOnFaint(enum BattlerId battler)
     gHitMarker |= HITMARKER_FAINTED(battler);
     gBattleStruct->eventState.faintedAction = 0;
     gBattlerFainted = battler;
+
+    u8 data = TRUE;
+    SetMonData(GetBattlerMon(battler), MON_DATA_IS_DEAD, &data);
+
     TryDeactivateSleepClause(GetBattlerSide(battler), gBattlerPartyIndexes[battler]);
 
     if (gBattleStruct->faintCounter[GetBattlerTrainer(battler)] < 255)

@@ -2435,6 +2435,9 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         case MON_DATA_IS_SHADOW:
             retVal = GetSubstruct3(boxMon)->isShadow;
             break;
+        case MON_DATA_IS_DEAD:
+            retVal = GetSubstruct3(boxMon)->isDead;
+            break;
         case MON_DATA_DYNAMAX_LEVEL:
             retVal = GetSubstruct3(boxMon)->dynamaxLevel;
             break;
@@ -2881,6 +2884,9 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
             break;
         case MON_DATA_IS_SHADOW:
             SET8(GetSubstruct3(boxMon)->isShadow);
+            break;
+        case MON_DATA_IS_DEAD:
+            SET8(GetSubstruct3(boxMon)->isDead);
             break;
         case MON_DATA_DYNAMAX_LEVEL:
             SET8(GetSubstruct3(boxMon)->dynamaxLevel);
@@ -6574,6 +6580,9 @@ void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality)
 void HealPokemon(struct Pokemon *mon)
 {
     u32 data;
+
+    if (GetMonData(mon, MON_DATA_IS_DEAD))
+        return;
 
     data = GetMonData(mon, MON_DATA_MAX_HP);
     SetMonData(mon, MON_DATA_HP, &data);
