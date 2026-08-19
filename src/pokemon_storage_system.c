@@ -31,6 +31,7 @@
 #include "script.h"
 #include "sound.h"
 #include "string_util.h"
+#include "start_menu.h"
 #include "strings.h"
 #include "text.h"
 #include "text_window.h"
@@ -540,6 +541,7 @@ struct PokemonStorageSystemData
 static u32 sItemIconGfxBuffer[98];
 
 EWRAM_DATA static u8 sPreviousBoxOption = 0;
+EWRAM_DATA static bool8 sOpenedFromStartMenu = FALSE;
 EWRAM_DATA static struct ChooseBoxMenu *sChooseBoxMenu = NULL;
 EWRAM_DATA static struct PokemonStorageSystemData *sStorage = NULL;
 EWRAM_DATA static bool8 sInPartyMenu = 0;
@@ -1515,11 +1517,6 @@ static void Task_PCMainMenu(u8 taskId)
     {
     case STATE_LOAD:
         CreateMainMenu(task->tSelectedOption, &task->tWindowId);
-        LoadMessageBoxAndBorderGfx();
-        DrawDialogueFrame(0, FALSE);
-        FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, TEXT_SKIP_DRAW, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-        CopyWindowToVram(0, COPYWIN_FULL);
         CopyWindowToVram(task->tWindowId, COPYWIN_FULL);
         task->tState++;
         break;
@@ -1541,17 +1538,24 @@ static void Task_PCMainMenu(u8 taskId)
             if (task->tSelectedOption != task->tNextOption)
             {
                 task->tSelectedOption = task->tNextOption;
-                FillWindowPixelBuffer(0, PIXEL_FILL(1));
-                AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
             }
             break;
         case MENU_B_PRESSED:
         case OPTION_EXIT:
             ClearStdWindowAndFrame(task->tWindowId, TRUE);
-            UnlockPlayerFieldControls();
-            ScriptContext_Enable();
             RemoveWindow(task->tWindowId);
             DestroyTask(taskId);
+
+            if (sOpenedFromStartMenu)
+            {
+                sOpenedFromStartMenu = FALSE;
+                ShowStartMenu();
+            }
+            else
+            {
+                UnlockPlayerFieldControls();
+                ScriptContext_Enable();
+            }
             break;
         default:
             if (task->tInput == OPTION_WITHDRAW && CountPartyMons() == PARTY_SIZE)
@@ -1621,6 +1625,8 @@ static void Task_PCMainMenu(u8 taskId)
 
 void ShowPokemonStorageSystemPC(void)
 {
+    sOpenedFromStartMenu = TRUE;
+
     u8 taskId = CreateTask(Task_PCMainMenu, 80);
     gTasks[taskId].tState = 0;
     gTasks[taskId].tSelectedOption = 0;
