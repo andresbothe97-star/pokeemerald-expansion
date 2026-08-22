@@ -1,13 +1,71 @@
+.equ EMERGENCYMON_PRICE, 2500
+
 EventScript_AfterWhiteOutHeal_Frlg::
 	lockall
 	textcolor NPC_TEXT_COLOR_FEMALE
-	msgbox gText_FirstShouldRestoreMonsHealth
-	call EventScript_PkmnCenterNurse_TakeAndHealPkmn_Frlg
+	goto_if_set FLAG_EASY_MODE, EventScript_PkmnCenterNurse_WhiteoutEasyModeHeal_Frlg
 	call_if_unset FLAG_DEFEATED_BROCK, EventScript_AfterWhiteOutHealMsgPreFirstBoss
 	call_if_set FLAG_DEFEATED_BROCK, EventScript_AfterWhiteOutHealMsg
-	applymovement VAR_LAST_TALKED, Movement_Bow
-	waitmovement 0
-	fadedefaultbgm
+	msgbox gText_EmergencyPokemonOffer
+	multichoice 19, 8, MULTI_YESNO, FALSE | (TRUE << 1)
+	switch VAR_RESULT
+	case 0, EventScript_EmergencyPokemonPrice
+	case 1, EventScript_EmergencyPokemonNo
+	case MULTI_B_PRESSED, EventScript_EmergencyPokemonNo
+	end
+
+EventScript_EmergencyPokemonNo::
+    msgbox gText_EmergencyPokemonNo
+    applymovement VAR_LAST_TALKED, Movement_Bow
+    waitmovement 0
+    fadedefaultbgm
+    releaseall
+    end
+
+EventScript_EmergencyPokemonPrice::
+	showmoneybox 0, 0
+	msgbox gText_EmergencyPokemonPrice
+	multichoice 19, 8, MULTI_YESNO, FALSE | (TRUE << 1)
+	switch VAR_RESULT
+	case 0, EventScript_EmergencyPokemonTryBuy
+	case 1, EventScript_EmergencyPokemonNo
+	case MULTI_B_PRESSED, EventScript_EmergencyPokemonNo
+	end
+
+EventScript_EmergencyPokemonTryBuy::
+	checkmoney EMERGENCYMON_PRICE
+	goto_if_eq VAR_RESULT, FALSE, EventScript_EmergencyPokemonNotEnough
+	goto EventScript_EmergencyPokemonYes
+
+EventScript_EmergencyPokemonNotEnough::
+	msgbox gText_EmergencyPokemonNotEnough
+    applymovement VAR_LAST_TALKED, Movement_Bow
+    waitmovement 0
+	hidemoneybox
+    fadedefaultbgm
+    releaseall
+    end
+
+EventScript_EmergencyPokemonYes::
+	removemoney EMERGENCYMON_PRICE
+	updatemoneybox
+	playfanfare MUS_LEVEL_UP
+	waitfanfare
+	specialvar VAR_RESULT, GiveEmergencyPokemon
+    bufferspeciesname STR_VAR_1, VAR_RESULT
+	hidemoneybox
+    msgbox gText_EmergencyPokemonYes
+    applymovement VAR_LAST_TALKED, Movement_Bow
+    waitmovement 0
+    fadedefaultbgm
+    releaseall
+    end
+
+EventScript_PkmnCenterNurse_WhiteoutEasyModeHeal_Frlg::
+	message Text_TakeYourPkmnForFewSeconds_Frlg
+	waitmessage
+	call EventScript_PkmnCenterNurse_TakeAndHealPkmn_Frlg
+	call EventScript_PkmnCenterNurse_ReturnPkmn_Frlg
 	releaseall
 	end
 

@@ -4,6 +4,10 @@ EventScript_Bookshelf::
 	msgbox Text_Bookshelf, MSGBOX_SIGN
 	end
 
+EventScript_BookshelfEragon::
+	msgbox Text_BookshelfEragon, MSGBOX_SIGN
+	end
+
 EventScript_PokeMartShelf::
 	msgbox Text_PokeMartShelf, MSGBOX_SIGN
 	end
@@ -117,6 +121,10 @@ EventScript_Indigo_HighestAuthority::
 Text_Bookshelf::
 	.string "It's crammed full of POKéMON\n"
 	.string "books.$"
+
+Text_BookshelfEragon::
+	.string "A well-worn copy of Eragon\n"
+	.string "rests on its side.$"
 
 Text_NothingButPokemonBooks::
 	.string "ほんだなに　ならんでいるのは\n"

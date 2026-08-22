@@ -1088,10 +1088,49 @@ EventScript_AfterWhiteOutMomHeal::
 	textcolor NPC_TEXT_COLOR_FEMALE
 	applymovement LOCALID_PLAYERS_HOUSE_1F_MOM, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
+	goto_if_unset FLAG_MOMS_MON, EventScript_MomsMon
 	msgbox gText_HadQuiteAnExperienceTakeRest
-	call Common_EventScript_OutOfCenterPartyHeal
-	msgbox gText_MomExplainHPGetPotions
 	fadedefaultbgm
+	releaseall
+	end
+
+EventScript_MomsMon::
+	msgbox gText_MomGivesMon
+	givemon SPECIES_MILTANK, 5
+	goto_if_eq VAR_RESULT, 0, EventScript_MomsMonParty
+	goto_if_eq VAR_RESULT, 1, EventScript_MomsMonPC
+	end
+
+EventScript_MomsMonParty::
+	bufferspeciesname STR_VAR_1, SPECIES_MILTANK
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EventScript_MomsMonStaySafe
+	call Common_EventScript_GetGiftMonPartySlot
+	fadescreen FADE_TO_BLACK
+	special ChangePokemonNickname
+	setflag FLAG_MOMS_MON
+	goto EventScript_MomsMonStaySafe
+	end
+
+EventScript_MomsMonPC::
+	bufferspeciesname STR_VAR_1, SPECIES_MILTANK
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EventScript_MomsMonStaySafe
+	fadescreen FADE_TO_BLACK
+	special ChangePokemonNickname
+	lock
+	faceplayer
+	setflag FLAG_MOMS_MON
+	goto EventScript_MomsMonTransfer
+	end
+
+EventScript_MomsMonTransfer::
+	call Common_EventScript_TransferredToPC
+	goto EventScript_MomsMonStaySafe
+	end
+
+EventScript_MomsMonStaySafe::
+	msgbox gText_MomsMonStaySafe
 	releaseall
 	end
 
@@ -1411,27 +1450,63 @@ gText_FirstShouldRestoreMonsHealth::
 	.string "POKéMON to full health.$"
 
 gText_MonsHealedShouldBuyPotions::
-	.string "Your POKéMON have been healed\n"
-	.string "to perfect health.\p"
-	.string "If your POKéMON's energy, HP,\n"
-	.string "is down, please come see us.\p"
-	.string "If you're planning to go far in the\n"
-	.string "field, you should buy some POTIONS\l"
-	.string "at the POKéMON MART.\p"
-	.string "We hope you excel!$"
+	.string "I'm afraid your insurance plan does\n"
+    .string "not cover recovery from fainting.\p"
+    .string "I recommend you build a new team from\n"
+    .string "the POKéMON in your BOX.\p"
+    .string "If you don't have any usable POKéMON,\n"
+    .string "we can offer you an emergency POKéMON\p"
+    .string "to get you back on your feet...\p"
+    .string "...for a price, of course.$"
 
 gText_MonsHealed::
-	.string "Your POKéMON have been healed\n"
-	.string "to perfect health.\p"
-	.string "We hope you excel!$"
+	.string "I'm afraid your insurance does not\n"
+    .string "cover recovery from fainting.\p"
+    .string "We can offer you an emergency POKéMON\n"
+    .string "to get you back on your feet...\p"
+    .string "...for a price, of course.$"
+
+gText_EmergencyPokemonOffer::
+	.string "Would you like an emergency POKéMON?$"
+
+gText_EmergencyPokemonNo::
+	.string "Be careful out there!$"
+
+gText_EmergencyPokemonYes::
+    .string "We've wired a {STR_VAR_1} to your Box.\p"
+    .string "Please be more careful next time!$"
+
+gText_EmergencyPokemonNotEnough::
+	.string "I'm sorry, it doesn't look\n"
+	.string "like you have enough money.\p"
+	.string "Be careful out there!$"
+
+gText_EmergencyPokemonPrice::
+	.string "After coinsurance the total is\n"
+	.string "only ¥2,500.\p"
+	.string "Is this okay?$"
 
 gText_HadQuiteAnExperienceTakeRest::
-	.string "MOM: {PLAYER}!\n"
-	.string "Welcome home.\p"
-	.string "It sounds like you had quite\n"
-	.string "an experience.\p"
-	.string "Maybe you should take a quick\n"
-	.string "rest.$"
+	.string "Ana Maria: {PLAYER}!\n"
+	.string "How have you lost twice already?\p"
+	.string "Maybe its worth resetting\n"
+	.string "if you can't even make it\p"
+	.string "to the first Poke Center$"
+ 
+gText_MomGivesMon::
+	.string "Ana Maria: {PLAYER}!\n"
+	.string "It seems like your party wiped!\p"
+	.string "Be sure to get to the next Pokecenter\n"
+	.string "if you're planning on losing again!\p"
+	.string "In the meantime I am happy to\n"
+	.string "loan you my Miltank.$"
+
+gText_MomsMonStaySafe::
+	.string "Please be more careful out there!\p"
+	.string "And make sure you get to the first\n"
+	.string "Poke Center you find!\p"
+	.string "HINT HINT\n"
+	.string "WINK WINK$"
 
 gText_MomExplainHPGetPotions::
 	.string "MOM: Oh, good! You and your\n"

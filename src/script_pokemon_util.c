@@ -35,6 +35,95 @@ static void CB2_ReturnFromChooseHalfParty(void);
 static void CB2_ReturnFromChooseBattleFrontierParty(void);
 static void HealPlayerBoxes(void);
 
+
+
+static const enum Species sEmergencyPokemonPoolEarly[] =
+{
+    SPECIES_POLIWAG,
+    SPECIES_HORSEA,
+    SPECIES_SKITTY,
+    SPECIES_MEOWTH,
+    SPECIES_WINGULL,
+    SPECIES_TAILLOW,
+    SPECIES_SHINX,
+    SPECIES_BRONZOR,
+    SPECIES_CHINGLING,
+    SPECIES_SMOOCHUM,
+    SPECIES_SLUGMA,
+    SPECIES_VULPIX,
+    SPECIES_CHERUBI,
+    SPECIES_SHROOMISH,
+    SPECIES_SWINUB,
+    SPECIES_POOCHYENA,
+    SPECIES_MEDITITE,
+    SPECIES_BARBOACH,
+    SPECIES_SHUPPET,
+    SPECIES_GEODUDE,
+    SPECIES_LEDYBA,
+    SPECIES_SPINARAK,
+    SPECIES_NINCADA,
+    SPECIES_STUNKY,
+    SPECIES_SNUBBULL,
+};
+
+static const enum Species sEmergencyPokemonPoolLate[] =
+{
+    SPECIES_VICTREEBEL,
+    SPECIES_JUMPLUFF,
+    SPECIES_GRANBULL,
+    SPECIES_SANDSLASH,
+    SPECIES_PILOSWINE,
+    SPECIES_VENOMOTH,
+    SPECIES_DODRIO,
+    SPECIES_GRUMPIG,
+    SPECIES_TORKOAL,
+    SPECIES_XATU,
+    SPECIES_LANTURN,
+    SPECIES_SOLROCK,
+    SPECIES_PELIPPER,
+    SPECIES_PERSIAN,
+    SPECIES_LUNATONE,
+    SPECIES_GLIGAR,
+    SPECIES_SNEASEL,
+    SPECIES_MEDICHAM,
+    SPECIES_PONYTA,
+    SPECIES_SUDOWOODO,
+    SPECIES_EXPLOUD,
+    SPECIES_YANMA,
+    SPECIES_MUNCHLAX,
+    SPECIES_PIKACHU,
+    SPECIES_CRANIDOS,
+};
+
+u16 GiveEmergencyPokemon(void)
+{
+    const enum Species *pool;
+    u32 poolSize;
+    u8 level;
+    enum Species species;
+    struct Pokemon mon;
+
+    if (FlagGet(FLAG_BADGE04_GET))
+    {
+        pool = sEmergencyPokemonPoolLate;
+        poolSize = ARRAY_COUNT(sEmergencyPokemonPoolLate);
+        level = 30;
+    }
+    else
+    {
+        pool = sEmergencyPokemonPoolEarly;
+        poolSize = ARRAY_COUNT(sEmergencyPokemonPoolEarly);
+        level = 10;
+    }
+
+    species = pool[Random() % poolSize];
+
+    CreateRandomMon(&mon, species, level);
+    CopyMonToPC(&mon);
+
+    return species;
+}
+
 void HealPlayerParty(void)
 {
     u32 i;

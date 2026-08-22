@@ -34,6 +34,10 @@ Route1_EventScript_RouteSign::
 	msgbox Route1_Text_RouteSign, MSGBOX_SIGN
 	end
 
+Route1_EventScript_LoungingVoltorb::
+	msgbox Route1_Text_Voltorb, MSGBOX_NPC
+	end
+
 Route1_Text_WorkAtPokeMartTakeSample::
 	.string "Hi!\n"
 	.string "I work at a POKéMON MART.\p"
@@ -52,13 +56,14 @@ Route1_Text_PutPotionAway::
 	.string "the BAG's ITEMS POCKET.$"
 
 Route1_Text_CanJumpFromLedges::
-	.string "See those ledges along the road?\p"
-	.string "It's a bit scary, but you can jump\n"
-	.string "from them.\p"
-	.string "You can get back to PALLET TOWN\n"
-	.string "quicker that way.$"
+	.string "See that PokéBall across the lake?\p"
+	.string "I wonder what's inside.$"
 
 Route1_Text_RouteSign::
 	.string "ROUTE 1\n"
 	.string "PALLET TOWN - VIRIDIAN CITY$"
 
+Route1_Text_Voltorb::
+	.string "Looks like its just a Voltorb\n"
+	.string "lounging in the sun.\p"
+	.string "Better just leave it be.$"

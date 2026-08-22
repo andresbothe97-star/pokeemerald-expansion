@@ -44,6 +44,9 @@ script PalletTown_ProfessorOaksLab_EventScript_ProfOak {
     if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 2) {
         goto(Go_On_Pick)
     }
+    if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 3) {
+        goto(Whats_In_The_Box)
+    }
     if (var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 4) {
         goto(Make_Me_Proud)
     }
@@ -60,14 +63,21 @@ script Starter_Dialogue {
            "{RIVAL} was up before you\n"
            "and Tito has PJ.\p"
            "So they already have their Pokemon.\n"
-           "But please, take your pick!\n")
+           "But please, take your pick!")
     setvar(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2)
+    setflag(FLAG_BEAT_RIVAL_IN_OAKS_LAB)
     releaseall
 }
 
 script Go_On_Pick{
     lockall
     msgbox("Go on! Take a pick!")
+    releaseall
+}
+
+script Whats_In_The_Box{
+    lockall
+    msgbox("Look in the Box!")
     releaseall
 }
 
@@ -82,8 +92,6 @@ script Lastly_Dialogue{
     releaseall
 
 }
-
-
 
 script PalletTown_ProfessorOaksLab_EventScript_BulbasaurBall {
     lockall
@@ -209,7 +217,8 @@ script Balls_And_Dexes{
         end
     }
     if(var(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB) == 3){
-        msgbox("A Pokedex, running shoes and map!")
+        msgbox("Score! A whole bunch of things!\n"
+               "A Pokedex, Running Shoes, and Map!\p")
         playfanfare(MUS_RG_OBTAIN_KEY_ITEM)
         setflag(FLAG_SYS_POKEDEX_GET)
         setflag(FLAG_SYS_POKEMON_GET)
@@ -227,8 +236,9 @@ script Balls_And_Dexes{
 
 script Final_Dialogue {
     lockall
-    msgbox("Hans: I hope these little trifles\n"
-           "can help you on your adventure!\n")
+    msgbox("Hans: Lastly, remember that your\n"
+           "insurance does not cover fainted\p"
+           "Pokemon so be very careful out there!")
     releaseall
 }
 
@@ -236,4 +246,21 @@ script Make_Me_Proud{
     lockall
     msgbox("Hans: Go on and have an adventure!\n")
     releaseall
+}
+
+script Dont_Leave_Yet{
+    lockall
+    applymovement(LOCALID_OAKS_LAB_PROF_OAK, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(LOCALID_OAKS_LAB_PROF_OAK)
+    applymovement(LOCALID_OAKS_LAB_PROF_OAK, Common_Movement_ExclamationMark)
+    waitmovement(LOCALID_OAKS_LAB_PROF_OAK)
+    msgbox("Hans: Wait! Don't leave yet!")
+    waitmessage
+    applymovement(LOCALID_PLAYER, MOVEMENT_DONT_LEAVE)
+    waitmovement(LOCALID_PLAYER)
+    releaseall
+}
+
+movement MOVEMENT_DONT_LEAVE {
+    walk_up * 1
 }

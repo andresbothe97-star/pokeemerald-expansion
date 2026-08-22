@@ -11059,8 +11059,11 @@ void SetValuesOnFaint(enum BattlerId battler)
     gBattleStruct->eventState.faintedAction = 0;
     gBattlerFainted = battler;
 
-    u8 data = TRUE;
-    SetMonData(GetBattlerMon(battler), MON_DATA_IS_DEAD, &data);
+    if (!FlagGet(FLAG_EASY_MODE))
+    {
+        u8 data = TRUE;
+        SetMonData(GetBattlerMon(battler), MON_DATA_IS_DEAD, &data);
+    }
 
     TryDeactivateSleepClause(GetBattlerSide(battler), gBattlerPartyIndexes[battler]);
 

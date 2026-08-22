@@ -27,7 +27,7 @@ Route4_PokemonCenter_1F_EventScript_MagikarpSalesman::
 	showmoneybox 0, 0
 	checkplayergender
 	goto_if_eq VAR_RESULT, MALE, Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpMale
-	goto_if_eq VAR_RESULT, FEMALE, Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpFemale
+	goto_if_eq VAR_RESULT, FEMALE, Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpMale
 	end
 
 Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpMale::
