@@ -2945,6 +2945,12 @@
 	call Common_EventScript_SetGymTrainers_Frlg
 	.endm
 
+	@ Clears the 'defeated' flag for all trainers in the specified gym.
+	.macro clear_gym_trainers_frlg gym:req
+	setvar VAR_0x8008, \gym
+	call Common_EventScript_ClearGymTrainers_Frlg
+	.endm
+
 	@ Prints a braille message, then waits for users input.
 	.macro braillemessage_wait text:req
 	setvar VAR_0x8006, 0

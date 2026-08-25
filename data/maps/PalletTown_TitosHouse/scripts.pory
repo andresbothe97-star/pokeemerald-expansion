@@ -3,9 +3,9 @@ mapscripts PalletTown_TitosHouse_MapScripts {}
 script PalletTown_Tito_HeadingToMuseum {
     lockall
     msgbox("Tito: Hi {PLAYER}!\n"
-           "PJ and I are heading out to the.\n"
-           "Museum in Pewter City soon!\p"
-           "Maybe we'll see you there!")
+           "PJ and I are heading out to the\p"
+           "Museum in Pewter City soon!\n"
+           "Maybe we'll see you there?")
     releaseall
 }
 

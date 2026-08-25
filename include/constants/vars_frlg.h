@@ -154,8 +154,8 @@
 
 
 #define VAR_0x408C                 0x408C //Used in Tito's Secret Mon
-#define VAR_0x408D                 0x408D
-#define VAR_0x408E                 0x408E
+#define VAR_GYM_BOSS_START         0x408D
+#define VAR_GYM_BLOCK_AND_SAVE     0x408E
 #define VAR_0x408F                 0x408F
 #define VAR_0x4090                 0x4090
 #define VAR_0x4091                 0x4091

@@ -98,9 +98,9 @@ PalletTown_Tito_PJsBall::
 PalletTown_Tito_HeadingToMuseum_Text_0:
 # 5 "data/maps/PalletTown_TitosHouse/scripts.pory"
 	.string "Tito: Hi {PLAYER}!\n"
-	.string "PJ and I are heading out to the.\n"
-	.string "Museum in Pewter City soon!\p"
-	.string "Maybe we'll see you there!$"
+	.string "PJ and I are heading out to the\p"
+	.string "Museum in Pewter City soon!\n"
+	.string "Maybe we'll see you there?$"
 
 PalletTown_Tito_RomHack_Text_0:
 # 14 "data/maps/PalletTown_TitosHouse/scripts.pory"

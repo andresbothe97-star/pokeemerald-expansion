@@ -3,7 +3,6 @@
   "name": "UnionRoom",
   "layout": "LAYOUT_UNION_ROOM",
   "music": "MUS_EVER_GRANDE",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_DYNAMIC",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -12,10 +11,12 @@
   "allow_escaping": false,
   "allow_running": false,
   "show_map_name": false,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_FRONTIER",
   "connections": null,
   "object_events": [
     {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_UNION_ROOM_NURSE",
       "x": 3,
       "y": 2,
@@ -30,6 +31,7 @@
     },
     {
       "local_id": "LOCALID_UNION_ROOM_PLAYER_4",
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_3",
       "x": 1,
       "y": 8,
@@ -44,6 +46,7 @@
     },
     {
       "local_id": "LOCALID_UNION_ROOM_PLAYER_8",
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_7",
       "x": 7,
       "y": 8,
@@ -58,6 +61,7 @@
     },
     {
       "local_id": "LOCALID_UNION_ROOM_PLAYER_7",
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_6",
       "x": 1,
       "y": 4,
@@ -72,6 +76,7 @@
     },
     {
       "local_id": "LOCALID_UNION_ROOM_PLAYER_6",
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_5",
       "x": 7,
       "y": 4,
@@ -86,6 +91,7 @@
     },
     {
       "local_id": "LOCALID_UNION_ROOM_PLAYER_5",
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_4",
       "x": 13,
       "y": 4,
@@ -100,6 +106,7 @@
     },
     {
       "local_id": "LOCALID_UNION_ROOM_PLAYER_3",
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_2",
       "x": 10,
       "y": 6,
@@ -114,6 +121,7 @@
     },
     {
       "local_id": "LOCALID_UNION_ROOM_PLAYER_2",
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_1",
       "x": 13,
       "y": 8,
@@ -128,6 +136,7 @@
     },
     {
       "local_id": "LOCALID_UNION_ROOM_PLAYER_1",
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 4,
       "y": 6,
@@ -158,5 +167,6 @@
     }
   ],
   "coord_events": [],
-  "bg_events": []
+  "bg_events": [],
+  "region": "REGION_HOENN"
 }

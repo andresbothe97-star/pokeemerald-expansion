@@ -753,9 +753,9 @@
 #define FLAG_OAKS_RATING_IS_VIA_PC                       0x2FF
 
 // Unused?
-#define FLAG_EASY_MODE              0x300
-#define FLAG_MOMS_MON               0x301
-#define FLAG_0x302               0x302
+#define FLAG_EASY_MODE           0x300
+#define FLAG_MOMS_MON            0x301
+#define FLAG_SYS_GYM_MODE        0x302 // To set Gym mode when entering gym
 #define FLAG_0x303               0x303
 #define FLAG_0x304               0x304
 #define FLAG_0x305               0x305

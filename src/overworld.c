@@ -393,6 +393,9 @@ static void (*const sMovementStatusHandler[])(struct LinkPlayerObjectEvent *, st
 void DoWhiteOut(void)
 {
     RunScriptImmediately(EventScript_WhiteOut);
+    if(FlagGet(FLAG_SYS_GYM_MODE) == TRUE){
+        FlagClear(FLAG_SYS_GYM_MODE);
+    }
     HealPlayerParty();
     Overworld_ResetStateAfterWhiteOut();
     SetWarpDestinationToLastHealLocation();

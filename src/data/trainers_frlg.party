@@ -935,6 +935,14 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 - Defense Curl
 - Sand Attack
 
+Geodude Alola
+Level: 11
+IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
+- Rock Polish
+- Tackle
+- Defense Curl
+- Rollout
+
 === TRAINER_CAMPER_SHANE ===
 Name: SHANE
 Class: Camper Frlg
@@ -7045,16 +7053,30 @@ AI: Check Bad Move / Try To Faint / Check Viability
 
 Geodude
 Level: 12
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 - Tackle
 - Defense Curl
+- Growl
 
 Onix
-Level: 14
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Level: 13
+IVs: 4 HP / 6 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 - Tackle
 - Bind
 - Rock Tomb
+- Screech
+
+Rhyhorn
+Level: 13
+IVs: 4 HP / 6 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
+
+Aerodactyl
+Level: 14
+IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 6 Spe
+- Rock Tomb
+- Supersonic
+- Wing Attack
+- Steel Wing
 
 === TRAINER_LEADER_MISTY ===
 Name: MISTY
@@ -8928,15 +8950,30 @@ Pic: Hiker Frlg
 Gender: Male
 Music: Hiker
 Double Battle: No
-AI: Check Bad Move
+AI: Check Bad Move / Try To Faint / Check Viability
 
-Machoke
-Level: 25
+Corsola
+Level: 11
 IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
+- Water Gun
+- Harden
+- Tackle
 
-Graveler
-Level: 25
+Cubone
+Level: 12
 IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
+- Headbutt
+- Tail Whip
+- Screech
+- Dig
+
+Aron
+Level: 12
+IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
+- Rock Tomb
+- Metal Claw
+- Roar
+- Harden
 
 === TRAINER_PKMN_PROF_PROF_OAK ===
 Name: PROF. OAK

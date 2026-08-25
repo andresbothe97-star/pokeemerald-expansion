@@ -8,6 +8,10 @@ bool32 GetSafariZoneFlag(void);
 void SetSafariZoneFlag(void);
 void ResetSafariZoneFlag(void);
 
+bool32 GetInGymFlag(void);
+void SetInGymFlag(void);
+void ResetInGymFlag(void);
+
 void EnterSafariMode(void);
 void ExitSafariMode(void);
 

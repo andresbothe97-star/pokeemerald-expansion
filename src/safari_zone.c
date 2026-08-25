@@ -37,6 +37,21 @@ EWRAM_DATA static struct PokeblockFeeder sPokeblockFeeders[NUM_POKEBLOCK_FEEDERS
 static void ClearAllPokeblockFeeders(void);
 static void DecrementFeederStepCounters(void);
 
+bool32 GetInGymFlag(void)
+{
+    return FlagGet(FLAG_SYS_GYM_MODE);
+}
+
+void SetInGymFlag(void)
+{
+    FlagSet(FLAG_SYS_GYM_MODE);
+}
+
+void ResetInGymFlag(void)
+{
+    FlagClear(FLAG_SYS_GYM_MODE);
+}
+
 bool32 GetSafariZoneFlag(void)
 {
     return FlagGet(FLAG_SYS_SAFARI_MODE);

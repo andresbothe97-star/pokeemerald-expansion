@@ -22,6 +22,18 @@ Common_EventScript_SetGymTrainers_Frlg::
 	case 8, EventScript_SetViridianGymTrainers
 	end
 
+Common_EventScript_ClearGymTrainers_Frlg::
+	switch VAR_0x8008
+	case 1, EventScript_ClearPewterGymTrainers
+	case 2, EventScript_ClearCeruleanGymTrainers
+	case 3, EventScript_ClearVermilionGymTrainers
+	case 4, EventScript_ClearCeladonGymTrainers
+	case 5, EventScript_ClearFuchsiaGymTrainers
+	case 6, EventScript_ClearSaffronGymTrainers
+	case 7, EventScript_ClearCinnabarGymTrainers
+	case 8, EventScript_ClearViridianGymTrainers
+	end
+
 RustboroCity_Gym_SetGymTrainers::
 	settrainerflag TRAINER_JOSH
 	settrainerflag TRAINER_TOMMY
@@ -105,6 +117,12 @@ SootopolisCity_Gym_SetGymTrainers::
 
 EventScript_SetPewterGymTrainers::
 	settrainerflag TRAINER_CAMPER_LIAM
+	settrainerflag TRAINER_HIKER_FRANKLIN_2
+	return
+
+EventScript_ClearPewterGymTrainers::
+	cleartrainerflag TRAINER_CAMPER_LIAM
+	cleartrainerflag TRAINER_HIKER_FRANKLIN_2
 	return
 
 EventScript_SetCeruleanGymTrainers::
@@ -112,10 +130,21 @@ EventScript_SetCeruleanGymTrainers::
 	settrainerflag TRAINER_SWIMMER_MALE_LUIS
 	return
 
+EventScript_ClearCeruleanGymTrainers::
+	cleartrainerflag TRAINER_PICNICKER_DIANA
+	cleartrainerflag TRAINER_SWIMMER_MALE_LUIS
+	return
+
 EventScript_SetVermilionGymTrainers::
 	settrainerflag TRAINER_SAILOR_DWAYNE
 	settrainerflag TRAINER_ENGINEER_BAILY
 	settrainerflag TRAINER_GENTLEMAN_TUCKER
+	return
+
+EventScript_ClearVermilionGymTrainers::
+	cleartrainerflag TRAINER_SAILOR_DWAYNE
+	cleartrainerflag TRAINER_ENGINEER_BAILY
+	cleartrainerflag TRAINER_GENTLEMAN_TUCKER
 	return
 
 EventScript_SetCeladonGymTrainers::
@@ -128,6 +157,16 @@ EventScript_SetCeladonGymTrainers::
 	settrainerflag TRAINER_COOLTRAINER_MARY
 	return
 
+EventScript_ClearCeladonGymTrainers::
+	cleartrainerflag TRAINER_LASS_KAY
+	cleartrainerflag TRAINER_LASS_LISA
+	cleartrainerflag TRAINER_PICNICKER_TINA
+	cleartrainerflag TRAINER_BEAUTY_BRIDGET
+	cleartrainerflag TRAINER_BEAUTY_TAMIA
+	cleartrainerflag TRAINER_BEAUTY_LORI
+	cleartrainerflag TRAINER_COOLTRAINER_MARY
+	return
+
 EventScript_SetFuchsiaGymTrainers::
 	settrainerflag TRAINER_TAMER_PHIL
 	settrainerflag TRAINER_TAMER_EDGAR
@@ -135,6 +174,15 @@ EventScript_SetFuchsiaGymTrainers::
 	settrainerflag TRAINER_JUGGLER_SHAWN
 	settrainerflag TRAINER_JUGGLER_KAYDEN
 	settrainerflag TRAINER_JUGGLER_NATE
+	return
+
+EventScript_ClearFuchsiaGymTrainers::
+	cleartrainerflag TRAINER_TAMER_PHIL
+	cleartrainerflag TRAINER_TAMER_EDGAR
+	cleartrainerflag TRAINER_JUGGLER_KIRK
+	cleartrainerflag TRAINER_JUGGLER_SHAWN
+	cleartrainerflag TRAINER_JUGGLER_KAYDEN
+	cleartrainerflag TRAINER_JUGGLER_NATE
 	return
 
 EventScript_SetSaffronGymTrainers::
@@ -147,6 +195,16 @@ EventScript_SetSaffronGymTrainers::
 	settrainerflag TRAINER_CHANNELER_TASHA
 	return
 
+EventScript_ClearSaffronGymTrainers::
+	cleartrainerflag TRAINER_PSYCHIC_JOHAN
+	cleartrainerflag TRAINER_PSYCHIC_TYRON
+	cleartrainerflag TRAINER_PSYCHIC_CAMERON
+	cleartrainerflag TRAINER_PSYCHIC_PRESTON
+	cleartrainerflag TRAINER_CHANNELER_AMANDA
+	cleartrainerflag TRAINER_CHANNELER_STACY
+	cleartrainerflag TRAINER_CHANNELER_TASHA
+	return
+
 EventScript_SetCinnabarGymTrainers::
 	settrainerflag TRAINER_SUPER_NERD_ERIK
 	settrainerflag TRAINER_SUPER_NERD_AVERY
@@ -155,6 +213,16 @@ EventScript_SetCinnabarGymTrainers::
 	settrainerflag TRAINER_BURGLAR_QUINN
 	settrainerflag TRAINER_BURGLAR_RAMON
 	settrainerflag TRAINER_BURGLAR_DUSTY
+	return
+
+EventScript_ClearCinnabarGymTrainers::
+	cleartrainerflag TRAINER_SUPER_NERD_ERIK
+	cleartrainerflag TRAINER_SUPER_NERD_AVERY
+	cleartrainerflag TRAINER_SUPER_NERD_DEREK
+	cleartrainerflag TRAINER_SUPER_NERD_ZAC
+	cleartrainerflag TRAINER_BURGLAR_QUINN
+	cleartrainerflag TRAINER_BURGLAR_RAMON
+	cleartrainerflag TRAINER_BURGLAR_DUSTY
 	return
 
 EventScript_SetViridianGymTrainers::
@@ -166,4 +234,15 @@ EventScript_SetViridianGymTrainers::
 	settrainerflag TRAINER_COOLTRAINER_SAMUEL
 	settrainerflag TRAINER_COOLTRAINER_YUJI
 	settrainerflag TRAINER_COOLTRAINER_WARREN
+	return
+
+EventScript_ClearViridianGymTrainers::
+	cleartrainerflag TRAINER_TAMER_JASON
+	cleartrainerflag TRAINER_TAMER_COLE
+	cleartrainerflag TRAINER_BLACK_BELT_ATSUSHI
+	cleartrainerflag TRAINER_BLACK_BELT_KIYO
+	cleartrainerflag TRAINER_BLACK_BELT_TAKASHI
+	cleartrainerflag TRAINER_COOLTRAINER_SAMUEL
+	cleartrainerflag TRAINER_COOLTRAINER_YUJI
+	cleartrainerflag TRAINER_COOLTRAINER_WARREN
 	return

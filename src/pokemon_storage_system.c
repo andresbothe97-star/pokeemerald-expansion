@@ -242,6 +242,7 @@ enum {
     PALTAG_MON_ICON_3, // Used implicitly in CreateMonIconSprite
     PALTAG_MON_ICON_4, // Used implicitly in CreateMonIconSprite
     PALTAG_MON_ICON_5, // Used implicitly in CreateMonIconSprite
+    PALTAG_DEAD_MON_ICON, // Used to mark dead mons
     PALTAG_DISPLAY_MON,
     PALTAG_MISC_1,
     PALTAG_MARKING_COMBO,
@@ -636,7 +637,7 @@ static void ReshowReleaseMon(void);
 static bool8 ResetReleaseMonSpritePtr(void);
 static void SetMovingMonPriority(u8);
 static void SpriteCB_HeldMon(struct Sprite *);
-static struct Sprite *CreateMonIconSprite(enum Species species, u32 personality, s16 x, s16 y, u8 oamPriority, u8 subpriority, bool32 isEgg);
+static struct Sprite *CreateMonIconSprite(enum Species species, u32 personality, s16 x, s16 y, u8 oamPriority, u8 subpriority, bool32 isEgg, bool32 isDead);
 static void DestroyBoxMonIcon(struct Sprite *);
 
 // Pokémon data
@@ -813,6 +814,7 @@ static void GiveChosenBagItem(void);
 static void SetUpHidePartyMenu(void);
 static void LoadPokeStorageMenuGfx(void);
 static void LoadWaveformSpritePalette(void);
+static void LoadDeadMonIconPalette(void);
 static void InitPokeStorageBg0(void);
 static void SetScrollingBackground(void);
 static void UpdateBoxToSendMons(void);
@@ -952,7 +954,7 @@ static const u16 sPartySlotFilled_Tilemap[]  = INCBIN_U16("graphics/pokemon_stor
 static const u16 sPartySlotEmpty_Tilemap[]   = INCBIN_U16("graphics/pokemon_storage/party_slot_empty.bin");
 static const u16 sWaveform_Pal[]             = INCGFX_U16("graphics/pokemon_storage/waveform.png", ".gbapal");
 static const u32 sWaveform_Gfx[]             = INCGFX_U32("graphics/pokemon_storage/waveform.png", ".4bpp");
-static const u16 sUnused_Pal[]               = INCGFX_U16("graphics/pokemon_storage/unused.pal", ".gbapal");
+static const u16 sDeadMonIcon_Pal[]               = INCGFX_U16("graphics/pokemon_storage/unused.pal", ".gbapal");
 static const u16 sTextWindows_Pal[]          = INCGFX_U16("graphics/pokemon_storage/text_windows.pal", ".gbapal");
 
 static const struct WindowTemplate sWindowTemplates[] =
@@ -1031,6 +1033,11 @@ static const struct BgTemplate sBgTemplates[] =
 static const struct SpritePalette sWaveformSpritePalette =
 {
     sWaveform_Pal, PALTAG_MISC_2
+};
+
+static const struct SpritePalette sDeadMonIconPalette =
+{
+    sDeadMonIcon_Pal, PALTAG_DEAD_MON_ICON
 };
 
 static const struct SpriteSheet sSpriteSheet_Waveform =
@@ -2096,6 +2103,7 @@ static void Task_InitPokeStorage(u8 taskId)
         }
         LoadPokeStorageMenuGfx();
         LoadWaveformSpritePalette();
+        LoadDeadMonIconPalette();
         break;
     case 1:
         if (!InitPokeStorageWindows())
@@ -3878,6 +3886,11 @@ static void LoadWaveformSpritePalette(void)
     LoadSpritePalette(&sWaveformSpritePalette);
 }
 
+static void LoadDeadMonIconPalette(void)
+{
+    LoadSpritePalette(&sDeadMonIconPalette);
+}
+
 static void InitPalettesAndSprites(void)
 {
     LoadPalette(sInterface_Pal, BG_PLTT_ID(0), sizeof(sInterface_Pal));
@@ -4458,8 +4471,9 @@ static void CreateMovingMonIcon(void)
     enum Species species = GetMonData(&sStorage->movingMon, MON_DATA_SPECIES);
     u8 priority = GetMonIconPriorityByCursorPos();
     bool32 isEgg = GetMonData(&sStorage->movingMon, MON_DATA_IS_EGG);
+    bool32 isDead = GetMonData(&sStorage->movingMon, MON_DATA_IS_DEAD);
 
-    sStorage->movingMonSprite = CreateMonIconSprite(species, personality, 0, 0, priority, 7, isEgg);
+    sStorage->movingMonSprite = CreateMonIconSprite(species, personality, 0, 0, priority, 7, isEgg, isDead);
     sStorage->movingMonSprite->callback = SpriteCB_HeldMon;
 }
 
@@ -4491,10 +4505,11 @@ static void InitBoxMonSprites(u8 boxId)
         {
             species = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_SPECIES);
             bool32 isEgg = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_IS_EGG);
+            bool32 isDead = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_IS_DEAD);
             if (species != SPECIES_NONE)
             {
                 personality = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_PERSONALITY);
-                sStorage->boxMonsSprites[count] = CreateMonIconSprite(species, personality, 8 * (3 * j) + 100, 8 * (3 * i) + 44, 2, 19 - j, isEgg);
+                sStorage->boxMonsSprites[count] = CreateMonIconSprite(species, personality, 8 * (3 * j) + 100, 8 * (3 * i) + 44, 2, 19 - j, isEgg, isDead);
 
                 if (ShouldBoxmonSpriteBeTransparent(boxId, boxPosition))
                     sStorage->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
@@ -4513,6 +4528,7 @@ static void CreateBoxMonIconAtPos(u8 boxPosition)
 {
     enum Species species = GetCurrentBoxMonData(boxPosition, MON_DATA_SPECIES);
     bool32 isEgg = GetCurrentBoxMonData(boxPosition, MON_DATA_IS_EGG);
+    bool32 isDead = GetCurrentBoxMonData(boxPosition, MON_DATA_IS_DEAD);
 
     if (species != SPECIES_NONE)
     {
@@ -4520,7 +4536,7 @@ static void CreateBoxMonIconAtPos(u8 boxPosition)
         s16 y = 8 * (3 * (boxPosition / IN_BOX_COLUMNS)) + 44;
         u32 personality = GetCurrentBoxMonData(boxPosition, MON_DATA_PERSONALITY);
 
-        sStorage->boxMonsSprites[boxPosition] = CreateMonIconSprite(species, personality, x, y, 2, 19 - (boxPosition % IN_BOX_COLUMNS), isEgg);
+        sStorage->boxMonsSprites[boxPosition] = CreateMonIconSprite(species, personality, x, y, 2, 19 - (boxPosition % IN_BOX_COLUMNS), isEgg, isDead);
         if (ShouldBoxmonSpriteBeTransparent(StorageGetCurrentBox(), boxPosition))
             sStorage->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
     }
@@ -4615,10 +4631,13 @@ static u8 CreateBoxMonIconsInColumn(u8 column, u16 distance, s16 speed)
     {
         if (sStorage->boxSpecies[boxPosition] != SPECIES_NONE)
         {
+            bool32 isDead = GetBoxMonDataAt(sStorage->incomingBoxId, boxPosition, MON_DATA_IS_DEAD);
+
             sStorage->boxMonsSprites[boxPosition] = CreateMonIconSprite(sStorage->boxSpecies[boxPosition],
                                                                         sStorage->boxPersonalities[boxPosition],
                                                                         x, y, 2, subpriority,
-                                                                        sStorage->boxIsEgg[boxPosition]);
+                                                                        sStorage->boxIsEgg[boxPosition],
+                                                                        isDead);
             if (sStorage->boxMonsSprites[boxPosition] != NULL)
             {
                 sStorage->boxMonsSprites[boxPosition]->sDistance = distance;
@@ -4752,11 +4771,12 @@ static void  CreatePartyMonSprite(u8 partyPosition, bool8 visible)
     enum Species species = GetMonData(partyPokemon, MON_DATA_SPECIES);
     bool32 isEgg = GetMonData(partyPokemon, MON_DATA_IS_EGG);
     u32 personality = GetMonData(partyPokemon, MON_DATA_PERSONALITY);
+    bool32 isDead = GetMonData(partyPokemon, MON_DATA_IS_DEAD);
 
     if (partyPosition == 0)
-        sStorage->partySprites[0] = CreateMonIconSprite(species, personality, 104, 64, 1, 12, isEgg);
+        sStorage->partySprites[0] = CreateMonIconSprite(species, personality, 104, 64, 1, 12, isEgg, isDead);
     else
-        sStorage->partySprites[partyPosition] = CreateMonIconSprite(species, personality, 152,  8 * (3 * (partyPosition - 1)) + 16, 1, 12, isEgg);
+        sStorage->partySprites[partyPosition] = CreateMonIconSprite(species, personality, 152,  8 * (3 * (partyPosition - 1)) + 16, 1, 12, isEgg, isDead);
 
     struct Sprite *partySprite = sStorage->partySprites[partyPosition];
 
@@ -4785,17 +4805,19 @@ static void CreatePartyMonsSprites(bool8 visible)
     enum Species species = GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES);
     bool32 isEgg = GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_IS_EGG);
     u32 personality = GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PERSONALITY);
+    bool32 isDead = GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_IS_DEAD);
 
-    sStorage->partySprites[0] = CreateMonIconSprite(species, personality, 104, 64, 1, 12, isEgg);
+    sStorage->partySprites[0] = CreateMonIconSprite(species, personality, 104, 64, 1, 12, isEgg, isDead);
     count = 1;
     for (i = 1; i < PARTY_SIZE; i++)
     {
         species = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES);
         isEgg = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_IS_EGG);
+        isDead = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_IS_DEAD);
         if (species != SPECIES_NONE)
         {
             personality = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_PERSONALITY);
-            sStorage->partySprites[i] = CreateMonIconSprite(species, personality, 152,  8 * (3 * (i - 1)) + 16, 1, 12, isEgg);
+            sStorage->partySprites[i] = CreateMonIconSprite(species, personality, 152,  8 * (3 * (i - 1)) + 16, 1, 12, isEgg, isDead);
             count++;
         }
         else
@@ -5201,7 +5223,7 @@ static void RemoveSpeciesFromIconList(enum Species species, enum SpeciesIconType
     }
 }
 
-static struct Sprite *CreateMonIconSprite(enum Species species, u32 personality, s16 x, s16 y, u8 oamPriority, u8 subpriority, bool32 isEgg)
+static struct Sprite *CreateMonIconSprite(enum Species species, u32 personality, s16 x, s16 y, u8 oamPriority, u8 subpriority, bool32 isEgg, bool32 isDead)
 {
     u16 tileNum;
     u8 spriteId;
@@ -5233,6 +5255,9 @@ static struct Sprite *CreateMonIconSprite(enum Species species, u32 personality,
     {
         template.paletteTag = PALTAG_MON_ICON_0 + gSpeciesInfo[species].iconPalIndex;
     }
+
+    if (isDead)
+        template.paletteTag = PALTAG_DEAD_MON_ICON;
 
     tileNum = TryLoadMonIconTiles(species, iconType);
     if (tileNum == 0xFFFF)
