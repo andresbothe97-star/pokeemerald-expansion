@@ -194,9 +194,9 @@ MtMoon_B2F_Text_Grunt3PostBattle::
 	.string "and scram!$"
 
 MtMoon_B2F_Text_Grunt4Intro::
-	.string "Little kids shouldn't be messing\n"
-	.string "around with grown-ups!\p"
-	.string "It could be bad news!$"
+	.string "We got some people stealing\n"
+	.string "ancient artifacts!\p"
+	.string "Wish I had gotten that job.$"
 
 MtMoon_B2F_Text_Grunt4Defeat::
 	.string "I'm steamed!$"

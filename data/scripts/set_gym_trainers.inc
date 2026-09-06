@@ -128,23 +128,23 @@ EventScript_ClearPewterGymTrainers::
 EventScript_SetCeruleanGymTrainers::
 	settrainerflag TRAINER_PICNICKER_DIANA
 	settrainerflag TRAINER_SWIMMER_MALE_LUIS
+	settrainerflag TRAINER_POKEMANIAC_MARK_2
 	return
 
 EventScript_ClearCeruleanGymTrainers::
 	cleartrainerflag TRAINER_PICNICKER_DIANA
 	cleartrainerflag TRAINER_SWIMMER_MALE_LUIS
+	cleartrainerflag TRAINER_POKEMANIAC_MARK_2
 	return
 
 EventScript_SetVermilionGymTrainers::
-	settrainerflag TRAINER_SAILOR_DWAYNE
-	settrainerflag TRAINER_ENGINEER_BAILY
-	settrainerflag TRAINER_GENTLEMAN_TUCKER
+	settrainerflag TRAINER_TWINS_ELI_ANNE
+	settrainerflag TRAINER_TWINS_ELI_ANNE_2
 	return
 
 EventScript_ClearVermilionGymTrainers::
-	cleartrainerflag TRAINER_SAILOR_DWAYNE
-	cleartrainerflag TRAINER_ENGINEER_BAILY
-	cleartrainerflag TRAINER_GENTLEMAN_TUCKER
+	cleartrainerflag TRAINER_TWINS_ELI_ANNE
+	cleartrainerflag TRAINER_TWINS_ELI_ANNE_2
 	return
 
 EventScript_SetCeladonGymTrainers::

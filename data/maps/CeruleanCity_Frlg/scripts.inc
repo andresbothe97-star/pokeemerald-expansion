@@ -5,12 +5,16 @@ CeruleanCity_Frlg_MapScripts::
 CeruleanCity_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_CERULEAN_CITY
 	call_if_unset FLAG_GOT_SS_TICKET, CeruleanCity_EventScript_BlockExits
+	call_if_unset FLAG_BADGE03_GET, CeruleanCity_EventScript_BlockRockTunnel
 	end
 
 CeruleanCity_EventScript_BlockExits::
 	setobjectxyperm LOCALID_CERULEAN_POLICEMAN, 30, 12
-	setobjectxyperm LOCALID_CERULEAN_SLOWBRO, 26, 31
-	setobjectxyperm LOCALID_CERULEAN_LASS, 27, 31
+	return
+
+CeruleanCity_EventScript_BlockRockTunnel::
+	setobjectxyperm LOCALID_CERULEAN_SLOWBRO, 49, 18
+	setobjectxyperm LOCALID_CERULEAN_LASS, 49, 19
 	return
 
 CeruleanCity_EventScript_RivalTriggerLeft::
@@ -358,18 +362,18 @@ CeruleanCity_EventScript_GymSign::
 	end
 
 CeruleanCity_Text_RivalIntro::
-	.string "{RIVAL}: Yo! {PLAYER}!\p"
-	.string "You're still struggling along back\n"
-	.string "here?\p"
-	.string "I'm doing great! I caught a bunch\n"
-	.string "of strong and smart POKéMON!\p"
+	.string "{RIVAL}: Hey! {PLAYER}!\p"
+	.string "I just got my second badge,\n"
+	.string "you should try next!\p"
+	.string "I also caught a bunch\n"
+	.string "of strong POKéMON!\p"
 	.string "Here, let me see what you caught,\n"
 	.string "{PLAYER}!$"
 
 CeruleanCity_Text_RivalDefeat::
 	.string "Hey!\n"
-	.string "Take it easy!\l"
-	.string "You won already!$"
+	.string "I think you might\l"
+	.string "be ready for Misty!$"
 
 CeruleanCity_Text_RivalPostBattle::
 	.string "{RIVAL}: Hey, guess what?\p"
@@ -384,22 +388,22 @@ CeruleanCity_Text_RivalPostBattle::
 	.string "Since you're using his system,\n"
 	.string "you should go thank him.\p"
 	.string "Well, I better get rolling!\n"
-	.string "Smell ya later!$"
+	.string "See ya later!$"
 
 CeruleanCity_Text_OhRightLittlePresentAsFavor::
-	.string "Oh, yeah, right.\p"
-	.string "I feel sorry for you. No, really.\n"
-	.string "You're always plodding behind me.\p"
-	.string "So here, I'll give you a little\n"
-	.string "present as a favor.$"
+	.string "Oh, right! I almost forgot.\p"
+	.string "I picked up something that I thought\n"
+	.string "you might find useful.\p"
+	.string "Here, take it.\n"
+	.string "Consider it a little present.$"
 
 CeruleanCity_Text_ExplainFameCheckerSmellYa::
-	.string "A chatty gossip like you…\n"
-	.string "That thing's perfect.\p"
-	.string "I don't need it because I don't\n"
-	.string "give a hoot about others.\p"
-	.string "All right, this time I really am\n"
-	.string "gone. Smell ya!$"
+	.string "Oh, you should definitely take this.\n"
+	.string "I think you'll get some use out of it.\p"
+	.string "I'm not really interested in that sort\n"
+	.string "of thing, so you might as well have it.\p"
+	.string "Anyway, I've got to get going.\n"
+	.string "See ya!$"
 
 CeruleanCity_Text_GruntIntro::
 	.string "Hey! Stay out!\n"

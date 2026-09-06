@@ -1,4 +1,13 @@
-mapscripts PalletTown_TitosHouse_MapScripts {}
+mapscripts PalletTown_TitosHouse_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: PalletTown_TitosHouse_TitoLeft
+}
+
+script PalletTown_TitosHouse_TitoLeft {
+    if(flag(FLAG_BADGE01_GET) == TRUE){
+        removeobject(LOCALID_PJBALL)
+        removeobject(LOCAL_ID_PALLETTOWN_TITO)
+    }
+}
 
 script PalletTown_Tito_HeadingToMuseum {
     lockall

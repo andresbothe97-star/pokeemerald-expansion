@@ -80,9 +80,7 @@ SSAnne_CaptainsOffice_Text_ExplainCut::
 	.string "around VERMILION CITY?$"
 
 SSAnne_CaptainsOffice_Text_SSAnneWillSetSailSoon::
-	.string "CAPTAIN: …Whew!\p"
-	.string "Now that I'm not sick anymore,\n"
-	.string "I guess it's time.\p"
+	.string "CAPTAIN: I guess it's time.\p"
 	.string "The S.S. ANNE will set sail soon!\p"
 	.string "Farewell, until our return to\n"
 	.string "VERMILION CITY!$"

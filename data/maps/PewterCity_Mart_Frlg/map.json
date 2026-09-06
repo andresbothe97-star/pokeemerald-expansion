@@ -3,7 +3,6 @@
   "name": "PewterCity_Mart_Frlg",
   "layout": "LAYOUT_MART_FRLG",
   "music": "MUS_RG_POKE_CENTER",
-  "region": "REGION_KANTO",
   "region_map_section": "MAPSEC_PEWTER_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -65,23 +64,24 @@
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_PEWTER_CITY",
-      "dest_warp_id": "3"
+      "dest_warp_id": "2"
     },
     {
       "x": 4,
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_PEWTER_CITY",
-      "dest_warp_id": "3"
+      "dest_warp_id": "2"
     },
     {
       "x": 5,
       "y": 7,
       "elevation": 3,
       "dest_map": "MAP_PEWTER_CITY",
-      "dest_warp_id": "3"
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [],
-  "bg_events": []
+  "bg_events": [],
+  "region": "REGION_KANTO"
 }

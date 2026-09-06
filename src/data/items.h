@@ -2050,6 +2050,25 @@ const struct ItemInfo gItemsInfo[] =
         .iconPalette = gItemIconPalette_RareCandy,
     },
 
+    [ITEM_GYM_CANDY] =
+    {
+        .name = ITEM_NAME("Gym Candy"),
+        .pluralName = ITEM_PLURAL_NAME("Gym Candies"),
+        .price = (I_PRICE >= GEN_7) ? 10 : 10,
+        .description = COMPOUND_STRING(
+            "Raises the level\n"
+            "of a Pokémon by\n"
+            "one."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_LEVEL_UP_ITEM,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_RareCandy,
+        .effect = gItemEffect_RareCandy,
+        .flingPower = 10,
+        .iconPic = gItemIcon_GymCandy,
+        .iconPalette = gItemIconPalette_RareCandy,
+    },
+    
     [ITEM_EXP_CANDY_XS] =
     {
         .name = ITEM_NAME("Exp. Candy XS"),

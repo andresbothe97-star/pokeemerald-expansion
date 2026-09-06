@@ -56,9 +56,49 @@ movement Movement_PewterCity_GymGuyStart {
 	face_up
 }
 
+movement Movement_PewterCity_GymGuyEnd {
+	walk_left * 3
+	face_right
+}
+
+script PewterCity_Gym_EventScript_GymStatue{
+	lockall
+	if(flag(FLAG_BADGE01_GET) == TRUE) {
+		goto(PewterCity_Gym_EventScript_GymStatuePostVictory)
+	}
+	msgbox(PewterCity_Gym_Text_GymStatue, MSGBOX_YESNO)
+	waitmessage
+	if(var(VAR_RESULT) == 1){
+		goto(Gym_Candies)
+	}
+	else{
+		msgbox("Should your Pokémon suffer\n"
+			   "career ending injuries,\p"
+			   "do come back!")
+	releaseall
+	end
+	}
+}
+
+script Gym_Candies{
+	removeallitem(ITEM_GYM_CANDY)
+	giveitem(ITEM_GYM_CANDY, 600)
+	msgbox("Remember, should you win or whiteout\n"
+		   "all Gym Candies will be removed!")
+	releaseall
+	end
+}
+
+script remove_gym_candies{
+	removeallitem(ITEM_GYM_CANDY)
+	return
+}
+
 raw `
 PewterCity_Gym_EventScript_Brock::
     clearflag FLAG_SYS_GYM_MODE
+	call remove_gym_candies
+	goto_if_set FLAG_BADGE01_GET, PewterCity_Gym_Script_BrockPostBattle
 	call PewterCity_Gym_Frlg_Boss_Start
 	famechecker FAMECHECKER_BROCK, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle_single TRAINER_LEADER_BROCK, PewterCity_Gym_Text_BrockIntro, PewterCity_Gym_Text_BrockDefeat, PewterCity_Gym_EventScript_DefeatedBrock, NO_MUSIC
@@ -69,6 +109,7 @@ PewterCity_Gym_EventScript_Brock::
 
 PewterCity_Gym_EventScript_DefeatedBrock::
 	famechecker FAMECHECKER_BROCK, 1
+	applymovement LOCALID_GYM_GUY_PEWTER, Movement_PewterCity_GymGuyEnd
 	setflag FLAG_DEFEATED_BROCK
 	setflag FLAG_BADGE01_GET
 	setvar VAR_MAP_SCENE_PEWTER_CITY, 1
@@ -132,20 +173,18 @@ PewterCity_Gym_EventScript_GymGuyAdvice::
 	release
 	end
 
-PewterCity_Gym_EventScript_GymStatue::
-	lockall
-	goto_if_set FLAG_BADGE01_GET, PewterCity_Gym_EventScript_GymStatuePostVictory
-	msgbox PewterCity_Gym_Text_GymStatue
-	releaseall
-	end
-
 PewterCity_Gym_EventScript_GymStatuePostVictory::
 	msgbox PewterCity_Gym_Text_GymStatuePlayerWon
 	releaseall
 	end
 
+PewterCity_Gym_Script_BrockPostBattle::
+	msgbox PewterCity_Gym_Text_BrockPostBattle
+	releaseall
+	end
+
 PewterCity_Gym_Text_BrockPrePos::
-	.string "So, you managed to get past my trianers.\n"
+	.string "So, you managed to get past my trainers.\n"
 	.string "Impressive!\p"
 	.string "My name is Brock, Pewter's Gym Leader.\n"
 	.string "Let's get this battle started.$"
@@ -237,21 +276,21 @@ PewterCity_Gym_Text_LetMeTakeYouToTheTop::
 	.string "Do you want to dream big?\p"
 	.string "Do you dare to dream of becoming\n"
 	.string "the POKéMON champ?\p"
-	.string "I'm no TRAINER, but I can advise\n"
-	.string "you on how to win.\p"
-	.string "Let me take you to the top!$"
+	.string "The Gyms here can be a bit tricky\n"
+	.string "and very punishing.\p"
+	.string "Want to know how they work?$"
 
 PewterCity_Gym_Text_LetsGetHappening::
 	.string "All right!\n"
 	.string "Let's get happening!$"
 
 PewterCity_Gym_Text_TryDifferentPartyOrders::
-	.string "The first POKéMON out in a match is\n"
-	.string "at the left of the POKéMON LIST.\p"
-	.string "By changing the order of POKéMON,\n"
-	.string "you may gain an advantage.\p"
-	.string "Try different orders to suit your\n"
-	.string "opponent's party.$"
+	.string "The statue up ahead dispenses candies\n"
+	.string "but if you wipe OR win they will.\p"
+	.string "be removed from your bag.\n"
+	.string "If you wipe you are welcome to try\p"
+	.string "again, but the trainers will be reset.\n"
+	.string "Hey! This game is for adults!$"
 
 PewterCity_Gym_Text_ItsFreeLetsGetHappening::
 	.string "It's a free service!\n"
@@ -262,10 +301,9 @@ PewterCity_Gym_Text_YoureChampMaterial::
 	.string "You're POKéMON champ material!$"
 
 PewterCity_Gym_Text_GymStatue::
-	.string "PEWTER POKéMON GYM\n"
-	.string "LEADER: BROCK\p"
-	.string "WINNING TRAINERS:\n"
-	.string "{RIVAL}$"
+	.string "Gym Candy Dispenser.\n"
+	.string "Would you like to raise your\p"
+	.string "Pokémon's levels to the cap?$"
 
 PewterCity_Gym_Text_GymStatuePlayerWon::
 	.string "PEWTER POKéMON GYM\n"

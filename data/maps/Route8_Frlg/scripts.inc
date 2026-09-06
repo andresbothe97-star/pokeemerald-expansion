@@ -5,6 +5,22 @@ Route8_EventScript_UndergroundPathSign::
 	msgbox Route8_Text_UndergroundPathSign, MSGBOX_SIGN
 	end
 
+Route8_EventScript_Baily::
+	trainerbattle_single TRAINER_ENGINEER_BAILY, Route8_Text_BailyIntro, Route8_Text_BailyDefeat
+	msgbox Route8_Text_BailyPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route8_Text_BailyIntro::
+	.string "I'm a lightweight, but I'm good\n"
+	.string "with electricity!$"
+
+Route8_Text_BailyDefeat::
+	.string "Fried!$"
+
+Route8_Text_BailyPostBattle::
+	.string "Oof. Guess I shouldn't\n"
+	.string "quit my day job.$"
+
 Route8_Text_AidanIntro::
 	.string "You look good at POKéMON, but how\n"
 	.string "is your chemistry grade?$"
@@ -114,37 +130,6 @@ Route8_Text_JuliaPostBattle::
 Route8_Text_UndergroundPathSign::
 	.string "UNDERGROUND PATH\n"
 	.string "CELADON CITY - LAVENDER TOWN$"
-
-Route8_Text_EliIntro::
-	.string "ELI: Twin power is fantastic.\n"
-	.string "Did you know?$"
-
-Route8_Text_EliDefeat::
-	.string "ELI: But…\n"
-	.string "We used our twin power…$"
-
-Route8_Text_EliPostBattle::
-	.string "ELI: I caught my POKéMON with\n"
-	.string "ANNE!$"
-
-Route8_Text_EliNotEnoughMons::
-	.string "ELI: We can't battle if you don't\n"
-	.string "have two POKéMON.$"
-
-Route8_Text_AnneIntro::
-	.string "ANNE: We'll shock you with our twin\n"
-	.string "power!$"
-
-Route8_Text_AnneDefeat::
-	.string "ANNE: Our twin power…$"
-
-Route8_Text_AnnePostBattle::
-	.string "ANNE: I'm raising POKéMON with\n"
-	.string "ELI.$"
-
-Route8_Text_AnneNotEnoughMons::
-	.string "ANNE: Hi, hi! Let's battle!\n"
-	.string "But bring two POKéMON.$"
 
 Route8_Text_RicardoIntro::
 	.string "My bike's acting up, man.$"

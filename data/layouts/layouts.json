@@ -5518,8 +5518,8 @@
       "name": "NavelRock_LadderRoom1_Layout",
       "width": 9,
       "height": 8,
-      "border_width": 0,
-      "border_height": 0,
+      "border_width": 2,
+      "border_height": 2,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_NavelRock",
       "border_filepath": "data/layouts/NavelRock_LadderRoom1/border.bin",
@@ -5531,8 +5531,8 @@
       "name": "NavelRock_LadderRoom2_Layout",
       "width": 9,
       "height": 8,
-      "border_width": 0,
-      "border_height": 0,
+      "border_width": 2,
+      "border_height": 2,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_NavelRock",
       "border_filepath": "data/layouts/NavelRock_LadderRoom2/border.bin",
@@ -5959,7 +5959,7 @@
       "id": "LAYOUT_VERMILION_CITY_GYM",
       "name": "VermilionCity_Gym_Layout",
       "width": 11,
-      "height": 21,
+      "height": 27,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_BuildingFrlg",
@@ -6764,7 +6764,7 @@
     {
       "id": "LAYOUT_SSANNE_EXTERIOR",
       "name": "SSAnne_Exterior_Layout",
-      "width": 70,
+      "width": 47,
       "height": 32,
       "border_width": 2,
       "border_height": 2,
@@ -9663,8 +9663,8 @@
     {
       "id": "LAYOUT_BIRTH_ISLAND_EXTERIOR_FRLG",
       "name": "BirthIsland_Exterior_FRLG_Layout",
-      "width": 30,
-      "height": 30,
+      "width": 32,
+      "height": 35,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_General_Frlg",
@@ -10217,6 +10217,19 @@
       "secondary_tileset": "gTileset_UnusedGatehouse1",
       "border_filepath": "data/layouts/PalletTown_TitosHouse/border.bin",
       "blockdata_filepath": "data/layouts/PalletTown_TitosHouse/map.bin"
+    },
+    {
+      "id": "LAYOUT_DIGLETTS_CAVE_B2F_FRLG_2",
+      "name": "DiglettsCave_B2F_Frlg_2_Layout",
+      "width": 54,
+      "height": 40,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_General_Frlg",
+      "secondary_tileset": "gTileset_DiglettsCave",
+      "border_filepath": "data/layouts/DiglettsCave_B2F_Frlg_2/border.bin",
+      "blockdata_filepath": "data/layouts/DiglettsCave_B2F_Frlg_2/map.bin",
+      "layout_version": "frlg"
     }
   ]
 }

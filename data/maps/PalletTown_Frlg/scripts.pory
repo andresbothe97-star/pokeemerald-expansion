@@ -410,6 +410,7 @@ PalletTown_Text_PressStartToOpenMenuCopy::
 script PalletTown_EventScript_TitosHouse {
     lockall
 	giveitem(ITEM_RARE_CANDY, 1)
+	giveitem(ITEM_GYM_CANDY, 1)
     msgbox("Tito's House")
     releaseall
 }

@@ -236,17 +236,17 @@ Route22_EventScript_LeagueGateSign::
 Route22_Text_EarlyRivalIntro::
 	.string "{RIVAL}: Hey! {PLAYER}!\p"
 	.string "You're off to the POKéMON LEAGUE?\n"
-	.string "Forget about it!\p"
-	.string "You probably don't have any\n"
-	.string "BADGES, do you?\p"
+	.string "You'll need to get some badges!\p"
 	.string "The guard won't let you through\n"
 	.string "without them.\p"
-	.string "By the way, did your POKéMON get\n"
-	.string "any stronger?$"
+	.string "I just caught these pokemon to\n"
+	.string "supplement my team!\p"
+	.string "Let's see how your team is \n"
+	.string "coming along!$"
 
 Route22_Text_EarlyRivalDefeat::
-	.string "Awww!\n"
-	.string "You just lucked out!$"
+	.string "Wow!\n"
+	.string "You're pretty good!$"
 
 Text_RivalVictory::
 	.string "Haha!\n"

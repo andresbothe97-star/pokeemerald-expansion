@@ -151,9 +151,9 @@ Route9_Text_ConnerRematchIntro::
 	.string "Go win, my super BUG POKéMON!$"
 
 Route10_Text_MarkRematchIntro::
-	.string "Wow, you came here again?\n"
-	.string "Maybe you're a POKéMANIAC, too?\l"
-	.string "Want to see my collection?$"
+	.string "You must be pretty good to get here!\n"
+	.string "You might be pretty talented?\l"
+	.string "Let's see how talented!$"
 
 Route10_Text_ClarkRematchIntro::
 	.string "Ha-hahah-ah-ha!\n"

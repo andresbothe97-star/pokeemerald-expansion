@@ -1,0 +1,534 @@
+mapscripts PewterCity_Museum_1F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: PewterCity_Museum_1F_Frlg_OnTransition
+	MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_MUSEUM_ROCKET_SCENE , 0: PewterCity_Museum_1F_Frlg_RocketSceneIntro
+    ]
+}
+
+script PewterCity_Museum_1F_Frlg_OnTransition {
+    if(flag(FLAG_ROCKET_MUSEUM_DONE) == TRUE){
+        setvar(VAR_MUSEUM_ROCKET_SCENE, 1)
+        setflag(FLAG_TITO_MUSEUM)
+        setflag(FLAG_ROCKET_MUSEUM)
+    }
+
+    else{
+        if(flag(FLAG_BADGE01_GET) == FALSE){
+            setflag(FLAG_TITO_MUSEUM)
+            setflag(FLAG_ROCKET_MUSEUM)
+        }
+
+        elif(flag(FLAG_BADGE01_GET) == TRUE){
+            clearflag(FLAG_TITO_MUSEUM)
+            setflag(FLAG_ROCKET_MUSEUM)
+        }
+    }
+        
+}
+
+script PewterCity_Museum_1F_Frlg_RocketSceneIntro {
+    if(flag(FLAG_BADGE01_GET) == TRUE){
+        setvar(VAR_MUSEUM_ROCKET_SCENE, 1)
+        goto(PewterCity_Museum_1F_Frlg_TitoYouMadeIt)
+        
+    }
+}
+
+script PewterCity_Museum_1F_Frlg_TitoYouMadeIt {
+    lockall
+    applymovement(LOCALID_TITO_MUSEUM, Common_Movement_ExclamationMark)
+    waitmovement
+    applymovement(LOCALID_TITO_MUSEUM, PewterCity_Museum_1F_Movement_TitoStart)
+    waitmovement
+    msgbox(PewterCity_Museum_1F_Text_TitoFirst)
+    waitmessage
+    closemessage
+    applymovement(LOCALID_TITO_MUSEUM, PewterCity_Museum_1F_Movement_TitoStatues)
+    applymovement(LOCALID_PLAYER, PewterCity_Museum_1F_Movement_PlayerStatues)
+    waitmovement
+    msgbox(PewterCity_Museum_1F_Text_TitoStatues)
+    waitmessage
+    closemessage
+    applymovement(LOCALID_TITO_MUSEUM, PewterCity_Museum_1F_Movement_TitoScroll)
+    applymovement(LOCALID_PLAYER, PewterCity_Museum_1F_Movement_PlayerScroll)
+    waitmovement
+    msgbox(PewterCity_Museum_1F_Text_TitoScroll)
+    waitmessage
+    goto(PewterCity_Museum_1F_Frlg_CuratorScene)
+}
+
+
+script PewterCity_Museum_1F_Frlg_CuratorScene {
+    applymovement(LOCALID_CURATOR, Common_Movement_ExclamationMark)
+    waitmovement
+    applymovement(LOCALID_CURATOR, PewterCity_Museum_1F_Movement_CuratorScroll)
+    waitmovement
+    msgbox(PewterCity_Museum_1F_Text_CuratorsResearch)
+    waitmessage
+    closemessage
+    goto(PewterCity_Museum_1F_Frlg_RocketEntrance)
+}
+
+script PewterCity_Museum_1F_Frlg_RocketEntrance {
+    msgbox(PewterCity_Museum_1F_Text_RocketStop)
+    waitmessage
+    addobject(LOCALID_ROCKET_EXEC_RED_MUSEUM)
+    addobject(LOCALID_ROCKET_1_MUSEUM)
+    addobject(LOCALID_ROCKET_2_MUSEUM)
+    playbgm(MUS_AQUA_MAGMA_HIDEOUT, FALSE)
+    playse(SE_PIN)
+    applymovement(LOCALID_CURATOR, Common_Movement_ExclamationMark)
+    applymovement(LOCALID_TITO_MUSEUM, Common_Movement_ExclamationMark)
+    applymovement(LOCALID_PLAYER, Common_Movement_ExclamationMark)
+    closemessage
+    applymovement(LOCALID_ROCKET_EXEC_RED_MUSEUM, PewterCity_Museum_1F_Movement_RedExecEntrance)
+    applymovement(LOCALID_ROCKET_1_MUSEUM, PewterCity_Museum_1F_Movement_R1Entrance)
+    applymovement(LOCALID_ROCKET_2_MUSEUM, PewterCity_Museum_1F_Movement_R2Entrance)
+    waitmovementall
+    goto(PewterCity_Museum_1F_Frlg_RocketSteal)
+}
+
+script PewterCity_Museum_1F_Frlg_RocketSteal {
+    msgbox(PewterCity_Museum_1F_Text_RocketMoveIt)
+    waitmessage
+    applymovement(LOCALID_PLAYER, PewterCity_Museum_1F_Movement_PlayerMoveit)
+    waitmovement
+    closemessage
+    applymovement(LOCALID_ROCKET_EXEC_RED_MUSEUM, PewterCity_Museum_1F_Movement_RedExecApproach)
+    msgbox(PewterCity_Museum_1F_Text_RocketStealScroll)
+    waitmessage
+    removeobject(LOCALID_ANCIENTSCROLL)
+    goto(PewterCity_Museum_1F_Frlg_RocketExit)
+}
+
+script PewterCity_Museum_1F_Frlg_RocketExit {
+    msgbox(PewterCity_Museum_1F_Text_RocketExit)
+    waitmessage
+    closemessage
+    applymovement(LOCALID_ROCKET_EXEC_RED_MUSEUM, PewterCity_Museum_1F_Movement_RedExecExit)
+    applymovement(LOCALID_ROCKET_1_MUSEUM, PewterCity_Museum_1F_Movement_R1Exit)
+    applymovement(LOCALID_ROCKET_2_MUSEUM, PewterCity_Museum_1F_Movement_R2Exit)
+    waitmovementall
+    removeobject(LOCALID_ROCKET_EXEC_RED_MUSEUM)
+    removeobject(LOCALID_ROCKET_1_MUSEUM)
+    removeobject(LOCALID_ROCKET_2_MUSEUM)
+    fadedefaultbgm
+    applymovement(LOCALID_TITO_MUSEUM, Common_Movement_ExclamationMark)
+    waitmovement
+    applymovement(LOCALID_TITO_MUSEUM, PewterCity_Museum_1F_Movement_TitoPostRocket)
+    waitmovement
+    msgbox(PewterCity_Museum_1F_Text_TitoFindScroll)
+    waitmessage
+    closemessage
+    applymovement(LOCALID_TITO_MUSEUM, PewterCity_Museum_1F_Movement_TitoFinal)
+    waitmovement
+    removeobject(LOCALID_TITO_MUSEUM)
+    setflag(FLAG_ROCKET_MUSEUM_DONE)
+    releaseall
+}
+
+script PewterCity_Museum_1F_EventScript_MuseumCuratorPostInvasion{
+	lockall
+    if(flag(FLAG_ROCKET_MUSEUM_DONE) == FALSE){
+        faceplayer
+        msgbox(PewterCity_Museum_1F_Text_CuratorAfterTheft)
+        waitmessage
+        applymovement(LOCALID_CURATOR, Common_Movement_FaceOriginalDirection)
+        waitmovement
+        releaseall
+	    end
+    }
+    else{
+        faceplayer
+        msgbox(PewterCity_Museum_1F_Text_CuratorAfterTheft)
+        waitmessage
+        applymovement(LOCALID_CURATOR, Common_Movement_FaceOriginalDirection)
+        waitmovement
+        releaseall
+	    end
+    }
+}
+
+
+raw `
+
+PewterCity_Museum_1F_Movement_TitoStart::
+    walk_right
+    walk_right
+    walk_down
+    step_end
+
+PewterCity_Museum_1F_Movement_TitoStatues::
+    walk_up
+    walk_up
+    walk_up
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    face_left
+    step_end
+
+PewterCity_Museum_1F_Movement_PlayerStatues::
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    face_up
+    step_end
+
+PewterCity_Museum_1F_Movement_TitoScroll::
+    walk_right
+    walk_right
+    walk_right
+    walk_down
+    face_up
+    step_end
+
+PewterCity_Museum_1F_Movement_PlayerScroll::
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    step_end
+
+PewterCity_Museum_1F_Movement_CuratorScroll::
+    walk_down
+    walk_left
+    face_left
+    step_end
+
+PewterCity_Museum_1F_Movement_RedExecEntrance::
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    step_end
+
+PewterCity_Museum_1F_Movement_R1Entrance::
+    walk_up
+    walk_up
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_up
+    walk_up
+    step_end
+
+PewterCity_Museum_1F_Movement_R2Entrance::
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    walk_right
+    step_end
+
+PewterCity_Museum_1F_Movement_PlayerMoveit::
+    walk_up
+    face_down
+    step_end
+
+PewterCity_Museum_1F_Movement_RedExecApproach::
+    walk_right
+    step_end
+
+PewterCity_Museum_1F_Movement_RedExecExit::
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    step_end
+
+PewterCity_Museum_1F_Movement_R1Exit::
+    walk_down
+    walk_down
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_down
+    walk_down
+    step_end
+
+PewterCity_Museum_1F_Movement_R2Exit::
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_left
+    walk_down
+    walk_down
+    walk_down
+    walk_down
+    step_end
+
+PewterCity_Museum_1F_Movement_TitoPostRocket::
+    walk_up
+    step_end
+
+PewterCity_Museum_1F_Movement_TitoFinal::
+    walk_fast_left
+    walk_fast_left
+    walk_fast_left
+    walk_fast_left
+    walk_fast_left
+    walk_fast_left
+    walk_fast_left
+    walk_fast_left
+    walk_fast_left
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    walk_fast_down
+    step_end
+
+PewterCity_Museum_1F_EventScript_Scientist1::
+	lockall
+	faceplayer
+	msgbox PewterCity_Museum_1F_Text_WeHaveTwoFossilsOnExhibit
+	waitmessage
+	applymovement LOCALID_MUSEUM_SCIENTIST1, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	releaseall
+	end
+
+PewterCity_Museum_1F_EventScript_Scientist3::
+	lockall
+	faceplayer
+	msgbox PewterCity_Museum_1F_Text_AncientTrio
+	waitmessage
+	releaseall
+	end
+
+PewterCity_Museum_1F_EventScript_Scientist2::
+	lockall
+	faceplayer
+	msgbox PewterCity_Museum_1F_Text_ResurrectionFossils
+	waitmessage
+	releaseall
+	end
+
+PewterCity_Museum_1F_EventScript_OldMan::
+	msgbox PewterCity_Museum_1F_Text_ShouldBeGratefulForLongLife, MSGBOX_NPC
+	end
+
+PewterCity_Museum_1F_EventScript_Cradily::
+    lockall
+    showmonpic SPECIES_CRADILY, 10, 3
+    msgbox PewterCity_Museum_1F_Text_Cradily
+    hidemonpic
+    releaseall
+    end
+
+PewterCity_Museum_1F_EventScript_Rampardos::
+    lockall
+    showmonpic SPECIES_RAMPARDOS, 10, 3
+    msgbox PewterCity_Museum_1F_Text_Rampardos
+    hidemonpic
+    releaseall
+    end
+
+PewterCity_Museum_1F_EventScript_Armaldo::
+    lockall
+    showmonpic SPECIES_ARMALDO, 10, 3
+    msgbox PewterCity_Museum_1F_Text_Armaldo
+    hidemonpic
+    releaseall
+    end
+
+PewterCity_Museum_1F_EventScript_Relicanth::
+    lockall
+    showmonpic SPECIES_RELICANTH, 10, 3
+    msgbox PewterCity_Museum_1F_Text_Relicanth
+    hidemonpic
+    releaseall
+    end
+
+PewterCity_Museum_1F_EventScript_AerodactylFossil::
+    lockall
+    showmonpic SPECIES_AERODACTYL, 10, 3
+    msgbox PewterCity_Museum_1F_Text_AerodactylFossil
+    hidemonpic
+    releaseall
+    end
+
+PewterCity_Museum_1F_EventScript_KabutopsFossil::
+	lockall
+	showmonpic SPECIES_KABUTOPS, 10, 3
+	msgbox PewterCity_Museum_1F_Text_KabutopsFossil
+	hidemonpic
+	releaseall
+	end
+
+PewterCity_Museum_1F_Text_TitosResearch::
+
+PewterCity_Museum_1F_Text_ResurrectionFossils::
+	.string "There's a LAB somewhere trying to\n"
+	.string "resurrect POKéMON fossils.$"
+
+PewterCity_Museum_1F_Text_AncientTrio::
+    .string "According to ancient legend, three\n"
+    .string "mighty beings once walked the earth.\p"
+    .string "Their names have been lost to time,\n"
+    .string "but their deeds have not.$"
+
+PewterCity_Museum_1F_Text_CuratorPreTheft::
+    .string "We've spent years collecting all\n"
+    .string "the artifacts you see here!\p"
+    .string "I hope you enjoy the exhibit!$"
+
+PewterCity_Museum_1F_Text_CuratorAfterTheft::
+    .string "Those thieves... They knew exactly\n"
+    .string "what they were looking for.\p"
+    .string "The ancient manuscript-- gone!\n"
+    .string "I've never seen anything like this.\p"
+    .string "What could they possibly want with\n"
+    .string "such an old artifact?$"
+
+@ Unused
+PewterCity_Museum_1F_Text_PleaseGoAround::
+	.string "あちらへ　おまわりください$"
+
+PewterCity_Museum_1F_Text_ShouldBeGratefulForLongLife::
+	.string "I should be grateful for my long\n"
+	.string "life.\p"
+	.string "Never did I think I would get to\n"
+	.string "see the bones of a dragon!$"
+
+PewterCity_Museum_1F_Text_WeHaveTwoFossilsOnExhibit::
+	.string "We have six fossils of rare,\n"
+	.string "prehistoric POKéMON on exhibit.$"
+
+PewterCity_Museum_1F_Text_AerodactylFossil::
+	.string "AERODACTYL Fossil\p"
+    .string "A fierce prehistoric POKéMON that\n"
+    .string "once ruled the ancient skies.$"
+
+PewterCity_Museum_1F_Text_KabutopsFossil::
+	.string "KABUTOPS Fossil\p"
+	.string "A primitive and rare POKéMON.$"
+
+PewterCity_Museum_1F_Text_Cradily::
+    .string "CRADILY Fossil\p"
+    .string "A prehistoric POKéMON believed to\n"
+    .string "have lived in ancient forests.$"
+
+PewterCity_Museum_1F_Text_Rampardos::
+    .string "RAMPARDOS Fossil\p"
+    .string "A prehistoric POKéMON known for its\n"
+    .string "remarkably strong skull.$"
+
+PewterCity_Museum_1F_Text_Armaldo::
+    .string "ARMALDO Fossil\p"
+    .string "A prehistoric POKéMON with powerful\n"
+    .string "claws and a durable shell.$"
+
+PewterCity_Museum_1F_Text_Relicanth::
+    .string "RELICANTH Fossil\p"
+    .string "An ancient POKéMON that has remained\n"
+    .string "unchanged for millions of years.$"
+
+PewterCity_Museum_1F_Text_TitoFirst::
+    .string "Tito: {PLAYER}! Glad you could make it!\p"
+    .string "There's a really cool new exhibit here\n"
+    .string "about a legendary trio from history.$"
+
+PewterCity_Museum_1F_Text_TitoStatues::
+    .string "These three statues are said to be\n"
+    .string "ancient depictions of the legendary trio.\p"
+    .string "Nobody knows for sure what they were,\n"
+    .string "but their story has survived for ages.$"
+
+PewterCity_Museum_1F_Text_TitoScroll::
+    .string "And here is the most important find of\n"
+    .string "them all.\p"
+    .string "An ancient scroll detailing the story of\n"
+    .string "a city that encountered the trio.\p"
+    .string "According to the scroll, the city was\n"
+    .string "later wiped out completely.$"
+
+PewterCity_Museum_1F_Text_CuratorsResearch::
+    .string "I couldn't help but overhear.\p"
+    .string "My name is BJORN. I'm the curator of\n"
+    .string "this museum.\p"
+    .string "Some exciting new research suggests\n"
+    .string "these three beings may have actually\p"
+    .string "been defending the city.\n"
+    .string "They battled an outside threat and\p"
+    .string "ultimately defeated it.\n"
+    .string "But the city never recovered from the\p"
+    .string "devastation caused by the battle.$"
+
+PewterCity_Museum_1F_Text_RocketStop::
+    .string "???: Everybody freeze!\n"
+    .string "Nobody move!$"
+
+PewterCity_Museum_1F_Text_RocketMoveIt::
+    .string "Beat it! Move out of the way!$"
+
+PewterCity_Museum_1F_Text_RocketStealScroll::
+    .string "So the ancient scroll is real?\p"
+    .string "Fuhahaha!\n"
+    .string "I'll be taking this for TEAM ROCKET!$"
+
+PewterCity_Museum_1F_Text_RocketExit::
+    .string "Much obliged!\n"
+    .string "Fuhahaha!$"
+
+PewterCity_Museum_1F_Text_TitoFindScroll::
+    .string "Tito: Those thieves!\p"
+    .string "We need to find out what they're up to\n"
+    .string "and get that scroll back, {PLAYER}!$"
+
+PewterCity_Museum_1F_Text_Statue::
+	.string "An ancient looking statue\n"
+	.string "depicting some sort of creature.$"
+
+`

@@ -1816,3 +1816,6 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 
 	.include "data/maps/PalletTown_TitosHouse/scripts.inc"
 	.include "data/maps/PalletTown_TitosHouse/text.inc"
+
+	.include "data/maps/DiglettsCave_B2F_Frlg_2/scripts.inc"
+	.include "data/maps/DiglettsCave_B2F_Frlg_2/text.inc"

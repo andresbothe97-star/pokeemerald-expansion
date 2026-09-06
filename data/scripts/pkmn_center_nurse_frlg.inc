@@ -2,6 +2,7 @@
 
 EventScript_AfterWhiteOutHeal_Frlg::
 	lockall
+	playbgm MUS_POKE_CENTER, 1
 	textcolor NPC_TEXT_COLOR_FEMALE
 	goto_if_set FLAG_EASY_MODE, EventScript_PkmnCenterNurse_WhiteoutEasyModeHeal_Frlg
 	call_if_unset FLAG_DEFEATED_BROCK, EventScript_AfterWhiteOutHealMsgPreFirstBoss

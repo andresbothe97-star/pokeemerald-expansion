@@ -1,0 +1,269 @@
+mapscripts CeruleanCity_Gym_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: CeruleanCity_Gym_Frlg_Gauntlet_OnTransition
+	MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_GYM_BLOCK_AND_SAVE , 0: CeruleanCity_Gym_Block_And_Save
+    ]
+}
+
+script CeruleanCity_Gym_Frlg_Gauntlet_OnTransition{
+    if(flag(FLAG_BADGE02_GET) == FALSE){
+        setflag(FLAG_SYS_GYM_MODE)
+		clear_gym_trainers_frlg(2)
+        setobjectxyperm(LOCALID_GYM_GUY_CERULEAN, 4, 23)
+		setvar(VAR_GYM_BLOCK_AND_SAVE, 0)
+    }
+
+	else{
+		setvar(VAR_GYM_BLOCK_AND_SAVE, 1)
+        setobjectxyperm(LOCALID_GYM_GUY_CERULEAN, 4, 23)
+	}
+}
+
+script CeruleanCity_Gym_Block_And_Save{
+	lockall
+	setvar(VAR_GYM_BLOCK_AND_SAVE, 1)
+	applymovement(LOCALID_PLAYER, Movement_CeruleanCity_Gym_PlayerStart)
+	waitmovement()
+	applymovement(LOCALID_GYM_GUY_CERULEAN, Movement_CeruleanCity_GymGuyStart)
+	waitmovement()
+    setobjectxyperm(LOCALID_GYM_GUY_CERULEAN, 6, 23)
+	forcesave
+	releaseall
+}
+
+movement CeruleanCity_Gym_Frlg_PlayerBossPos {
+	walk_up * 2
+	face_up
+}
+
+movement CeruleanCity_Gym_Frlg_MistyBossPos {
+	walk_right * 2
+    walk_up * 5
+    walk_left * 2
+    walk_down
+	face_down
+}
+
+movement Movement_CeruleanCity_Gym_PlayerStart {
+	walk_up
+}
+
+movement Movement_CeruleanCity_GymGuyStart {
+	walk_right * 2
+	face_up
+}
+
+script CeruleanCity_Gym_EventScript_GymStatue{
+	lockall
+	if(flag(FLAG_BADGE02_GET) == TRUE) {
+		goto(CeruleanCity_Gym_EventScript_GymStatuePostVictory)
+	}
+	msgbox(CeruleanCity_Gym_Text_GymStatue, MSGBOX_YESNO)
+	waitmessage
+	if(var(VAR_RESULT) == 1){
+		goto(Gym_Candies)
+	}
+	else{
+		msgbox("Should your Pokémon suffer\n"
+			   "career ending injuries,\p"
+			   "do come back!")
+	releaseall
+	end
+	}
+}
+
+script CeruleanCity_Gym_Frlg_Boss_Start{
+	msgbox(CeruleanCity_Gym_Text_MistyPrePos)
+	waitmessage
+	applymovement(LOCALID_PLAYER, CeruleanCity_Gym_Frlg_PlayerBossPos)
+	applymovement(LOCALID_MISTY, CeruleanCity_Gym_Frlg_MistyBossPos)
+	waitmovement
+	return
+}
+
+
+raw`
+CeruleanCity_Gym_EventScript_Misty::
+    clearflag FLAG_SYS_GYM_MODE
+    call remove_gym_candies
+    applymovement LOCALID_GYM_GUY_CERULEAN, Movement_CeruleanCity_GymGuyStart
+    setobjectxyperm LOCALID_GYM_GUY_CERULEAN, 8, 23
+    goto_if_set FLAG_BADGE02_GET, CeruleanCity_Gym_Script_MistyPostBattle
+    call CeruleanCity_Gym_Frlg_Boss_Start
+	famechecker FAMECHECKER_MISTY, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
+	trainerbattle_single TRAINER_LEADER_MISTY, CeruleanCity_Gym_Text_MistyIntro, CeruleanCity_Gym_Text_MistyDefeat, CeruleanCity_Gym_EventScript_MistyDefeated, NO_MUSIC
+	goto_if_unset FLAG_GOT_TM03_FROM_MISTY, CeruleanCity_Gym_EventScript_GiveTM03
+	msgbox CeruleanCity_Gym_Text_ExplainTM03
+	release
+	end
+
+CeruleanCity_Gym_EventScript_MistyDefeated::
+	famechecker FAMECHECKER_MISTY, 1
+	setflag FLAG_DEFEATED_MISTY
+	setflag FLAG_BADGE02_GET
+	setrespawn HEAL_LOCATION_CERULEAN_CITY
+	set_gym_trainers_frlg 2
+	goto CeruleanCity_Gym_EventScript_GiveTM03
+	end
+
+CeruleanCity_Gym_EventScript_GiveTM03::
+	msgbox CeruleanCity_Gym_Text_ExplainCascadeBadge
+	checkitemspace ITEM_TM03
+	goto_if_eq VAR_RESULT, FALSE, CeruleanCity_Gym_EventScript_NoRoomForTM03
+	giveitem_msg CeruleanCity_Gym_Text_ReceivedTM03FromMisty, ITEM_TM03
+	setflag FLAG_GOT_TM03_FROM_MISTY
+	msgbox CeruleanCity_Gym_Text_ExplainTM03
+	release
+	end
+
+CeruleanCity_Gym_EventScript_NoRoomForTM03::
+	msgbox CeruleanCity_Gym_Text_BetterMakeRoomForThis
+	release
+	end
+
+CeruleanCity_Gym_EventScript_Diana::
+	trainerbattle_single TRAINER_PICNICKER_DIANA, CeruleanCity_Gym_Text_DianaIntro, CeruleanCity_Gym_Text_DianaDefeat
+	msgbox CeruleanCity_Gym_Text_DianaPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+CeruleanCity_Gym_EventScript_Luis::
+	trainerbattle_single TRAINER_SWIMMER_MALE_LUIS, CeruleanCity_Gym_Text_LuisIntro, CeruleanCity_Gym_Text_LuisDefeat
+	famechecker FAMECHECKER_MISTY, 2
+	msgbox CeruleanCity_Gym_Text_LuisPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+CeruleanGym_EventScript_Mark::
+	trainerbattle_single TRAINER_POKEMANIAC_MARK_2, CeruleanGym_Text_MarkIntro, CeruleanGym_Text_MarkDefeat
+	msgbox CeruleanGym_Text_MarkPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+CeruleanCity_Gym_EventScript_GymGuy::
+	lock
+	faceplayer
+	goto_if_set FLAG_DEFEATED_MISTY, CeruleanCity_Gym_EventScript_GymGuyPostVictory
+	msgbox CeruleanCity_Gym_Text_GymGuyAdvice
+	release
+	end
+
+CeruleanCity_Gym_EventScript_GymGuyPostVictory::
+	msgbox CeruleanCity_Gym_Text_WeMakePrettyGoodTeam
+	release
+	end
+
+CeruleanCity_Gym_EventScript_GymStatuePostVictory::
+	msgbox CeruleanCity_Gym_Text_GymStatuePlayerWon
+	releaseall
+	end
+
+CeruleanCity_Gym_Script_MistyPostBattle::
+    msgbox CeruleanCity_Gym_Text_ExplainTM03
+	releaseall
+	end
+
+CeruleanCity_Gym_Text_MistyPrePos::
+    .string "{PLAYER}, is it?\p"
+    .string "Your brother told me you might\n"
+    .string "be coming this way. If you're\p"
+    .string "as strong as he is, this will be\n"
+    .string "very fun!\p"
+    .string "Well, lets get started!$"
+
+
+CeruleanCity_Gym_Text_MistyIntro::
+	.string "Your second badge won't be easy!\p"
+	.string "My policy is an all-out offensive\n"
+	.string "with WATER-type POKéMON!{PLAY_BGM}{MUS_RG_ENCOUNTER_GYM_LEADER}$"
+
+CeruleanCity_Gym_Text_ExplainTM03::
+	.string "TM03 teaches WATER PULSE.\p"
+	.string "Use it on an aquatic POKéMON!$"
+
+CeruleanCity_Gym_Text_ExplainCascadeBadge::
+	.string "The CASCADEBADGE will now\n"
+	.string "let your POKéMON reach level 29.\p"
+	.string "It also lets all POKéMON\n"
+	.string "Cut small trees!\p"
+	.string "You just need to have the HM\n"
+	.string "in your inventory!\p"
+	.string "You can also have my favorite TM.$"
+
+CeruleanCity_Gym_Text_ReceivedTM03FromMisty::
+	.string "{PLAYER} received TM03\n"
+	.string "from MISTY.$"
+
+CeruleanCity_Gym_Text_BetterMakeRoomForThis::
+	.string "You better make room for this!$"
+
+CeruleanCity_Gym_Text_MistyDefeat::
+	.string "Wow!\n"
+	.string "You're too much!\p"
+	.string "All right!\p"
+	.string "You can have the CASCADEBADGE to\n"
+	.string "show you beat me.$"
+
+CeruleanGym_Text_MarkIntro::
+    .string "You made it all the way here?\n"
+    .string "Well, let's see what you've got!\p"
+    .string "MISTY won't be waiting around forever.$"
+
+CeruleanGym_Text_MarkDefeat::
+    .string "What?! I lost?!\n"
+    .string "Guess I wasn't ready for you.$"
+
+CeruleanGym_Text_MarkPostBattle::
+    .string "You really are something!\n"
+    .string "Now go show MISTY what you can do!$"
+
+CeruleanCity_Gym_Text_DianaIntro::
+	.string "What? You?\n"
+	.string "I'm more than good enough for you!\p"
+	.string "MISTY won't have to be bothered.$"
+
+CeruleanCity_Gym_Text_DianaDefeat::
+	.string "You overwhelmed me!$"
+
+CeruleanCity_Gym_Text_DianaPostBattle::
+	.string "You have to face other TRAINERS\n"
+	.string "to see how good you really are.$"
+
+CeruleanCity_Gym_Text_LuisIntro::
+	.string "Splash!\p"
+	.string "I'm first up!\n"
+	.string "Let's do it!$"
+
+CeruleanCity_Gym_Text_LuisDefeat::
+	.string "That can't be!$"
+
+CeruleanCity_Gym_Text_LuisPostBattle::
+	.string "MISTY is a TRAINER who's going to\n"
+	.string "keep improving.\p"
+	.string "She won't lose to someone like you!$"
+
+CeruleanCity_Gym_Text_GymGuyAdvice::
+	.string "Yo!\n"
+	.string "Champ in the making!\p"
+	.string "Let me give you some advice!\p"
+	.string "The LEADER, MISTY, is a pro who\n"
+	.string "uses WATER-type POKéMON.\p"
+	.string "You can drain all their water with\n"
+	.string "GRASS-type POKéMON.\p"
+	.string "Or, you might use ELECTRIC-type\n"
+	.string "POKéMON and zap them!$"
+
+CeruleanCity_Gym_Text_WeMakePrettyGoodTeam::
+	.string "You beat MISTY!\n"
+	.string "See, what'd I tell ya?\p"
+	.string "You and me, we make a pretty\n"
+	.string "darn-good team!$"
+
+CeruleanCity_Gym_Text_GymStatue::
+    .string "Gym Candy Dispenser.\n"
+	.string "Would you like to raise your\p"
+	.string "Pokémon's levels to the cap?$"
+
+CeruleanCity_Gym_Text_GymStatuePlayerWon::
+	.string "CERULEAN POKéMON GYM\n"
+	.string "LEADER: MISTY\p"
+	.string "WINNING TRAINERS:\n"
+	.string "{RIVAL}, {PLAYER}$"
+`

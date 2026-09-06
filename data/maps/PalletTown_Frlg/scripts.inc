@@ -819,12 +819,14 @@ PalletTown_EventScript_TitosHouse::
 # 412 "data/maps/PalletTown_Frlg/scripts.pory"
 	giveitem ITEM_RARE_CANDY, 1
 # 413 "data/maps/PalletTown_Frlg/scripts.pory"
-	msgbox PalletTown_EventScript_TitosHouse_Text_0
+	giveitem ITEM_GYM_CANDY, 1
 # 414 "data/maps/PalletTown_Frlg/scripts.pory"
+	msgbox PalletTown_EventScript_TitosHouse_Text_0
+# 415 "data/maps/PalletTown_Frlg/scripts.pory"
 	releaseall
 	return
 
 
 PalletTown_EventScript_TitosHouse_Text_0:
-# 413 "data/maps/PalletTown_Frlg/scripts.pory"
+# 414 "data/maps/PalletTown_Frlg/scripts.pory"
 	.string "Tito's House$"

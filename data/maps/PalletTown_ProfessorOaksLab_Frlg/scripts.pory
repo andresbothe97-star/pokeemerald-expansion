@@ -23,6 +23,8 @@ script Get_Ready_To_Move {
 
     setobjectxyperm(LOCALID_OAKS_LAB_PROF_OAK, 6, 3)
     applymovement(LOCALID_OAKS_LAB_PROF_OAK, MOVEMENT_OAK_POSITIONING)
+    applymovement(LOCALID_PLAYER, MOVEMENT_PLAYER_POSITIONING)
+    waitmovement
     setvar(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1)
 }
 
@@ -33,6 +35,10 @@ movement MOVEMENT_OAK_ENTRANCE_SCENE {
 
 movement MOVEMENT_OAK_POSITIONING {
     face_down
+}
+
+movement MOVEMENT_PLAYER_POSITIONING{
+    walk_up * 5
 }
 
 script PalletTown_ProfessorOaksLab_EventScript_ProfOak {

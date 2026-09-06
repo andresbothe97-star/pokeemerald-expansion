@@ -1,0 +1,52 @@
+mapscripts DiglettsCave_B1F_Frlg_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: DiglettsCave_B1F_OnTransition
+}
+
+script DiglettsCave_B1F_OnTransition {
+    setworldmapflag(FLAG_WORLD_MAP_DIGLETTS_CAVE_B1F)
+}
+
+script DiglettsCave_B1F_Archeologist {
+    lockall
+	faceplayer
+	msgbox(DiglettsCave_B1F_Text_WeAreExcavatingRuins)
+	waitmessage
+	applymovement(LOCALID_DIGLETTSCAVE_B1F_ARCHEOLOGIST, Common_Movement_FaceOriginalDirection)
+	waitmovement
+	releaseall
+	end
+}
+
+script DiglettsCave_B1F_Scientist {
+    lockall
+	faceplayer
+	msgbox(DiglettsCave_B1F_Text_TooHeavyForMe)
+	waitmessage
+	applymovement(LOCALID_DIGLETTSCAVE_B1F_SCIENTIST, Common_Movement_FaceOriginalDirection)
+	waitmovement
+	releaseall
+	end
+}
+
+script DiglettsCave_B1F_Bag {
+    lockall
+    msgbox("A bag filled with trowels.\n"
+           "Must be for digging.")
+    releaseall
+}
+
+
+raw`
+
+DiglettsCave_B1F_Text_WeAreExcavatingRuins::
+    .string "Watch out Lad!\p"
+    .string "Can't you see you're in\n"
+    .string "an archeologic dig site!$"
+	
+DiglettsCave_B1F_Text_TooHeavyForMe::
+    .string "HUUUURRRMMMPPHHH\p"
+    .string "This rock is way too heavy.\n"
+    .string "Might need to borrow a Machop.$"
+
+
+`

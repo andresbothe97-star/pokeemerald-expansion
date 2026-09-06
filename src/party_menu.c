@@ -4107,6 +4107,11 @@ static void CursorCb_FieldMove(u8 taskId)
             DisplayPartyMenuMessage(gText_CantUseUntilNewBadge, TRUE);
             gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
         }
+        else if (fieldMove == FIELD_MOVE_FLY && !FlagGet(FLAG_GOT_HM02))
+        {
+            DisplayPartyMenuStdMessage(PARTY_MSG_CANT_USE_HERE);
+            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        }
         else if (SetUpFieldMove(fieldMove) == TRUE)
         {
             switch (fieldMove)

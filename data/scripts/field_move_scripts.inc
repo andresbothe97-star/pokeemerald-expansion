@@ -1,6 +1,7 @@
 @ Interact with cuttable tree
 EventScript_CutTree::
 	lockall
+	goto_if_unset FLAG_GOT_HM01, EventScript_CheckTreeCantCut
 	checkfieldmove FIELD_MOVE_CUT, TRUE
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CheckTreeCantCut
 	setfieldeffectargument 0, VAR_RESULT
@@ -223,6 +224,7 @@ Text_CantSmash:
 
 EventScript_StrengthBoulder::
 	lockall
+	goto_if_unset FLAG_GOT_HM04, EventScript_CantStrength
 	goto_if_set FLAG_SYS_USE_STRENGTH, EventScript_CheckActivatedBoulder
 	checkfieldmove FIELD_MOVE_STRENGTH, TRUE
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantStrength

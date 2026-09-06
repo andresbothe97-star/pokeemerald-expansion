@@ -610,8 +610,6 @@ Route10_EventScript_CarolRematch::
 
 Route10_EventScript_Mark::
 	trainerbattle_single TRAINER_POKEMANIAC_MARK, Route10_Text_MarkIntro, Route10_Text_MarkDefeat
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route10_EventScript_MarkRematch
 	msgbox Route10_Text_MarkPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -762,30 +760,6 @@ Route8_EventScript_Rich::
 Route8_EventScript_RichRematch::
 	trainerbattle_rematch TRAINER_GAMER_RICH, Route8_Text_RichRematchIntro, Route8_Text_RichDefeat
 	msgbox Route8_Text_RichPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route8_EventScript_Eli::
-	trainerbattle_double TRAINER_TWINS_ELI_ANNE, Route8_Text_EliIntro, Route8_Text_EliDefeat, Route8_Text_EliNotEnoughMons
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route8_EventScript_EliRematch
-	msgbox Route8_Text_EliPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route8_EventScript_EliRematch::
-	trainerbattle_rematch_double TRAINER_TWINS_ELI_ANNE, Route8_Text_EliRematchIntro, Route8_Text_EliDefeat, Route8_Text_EliNotEnoughMons
-	msgbox Route8_Text_EliPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route8_EventScript_Anne::
-	trainerbattle_double TRAINER_TWINS_ELI_ANNE, Route8_Text_AnneIntro, Route8_Text_AnneDefeat, Route8_Text_AnneNotEnoughMons
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route8_EventScript_AnneRematch
-	msgbox Route8_Text_AnnePostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route8_EventScript_AnneRematch::
-	trainerbattle_rematch_double TRAINER_TWINS_ELI_ANNE, Route8_Text_AnneRematchIntro, Route8_Text_AnneDefeat, Route8_Text_AnneNotEnoughMons
-	msgbox Route8_Text_AnnePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route8_EventScript_Ricardo::

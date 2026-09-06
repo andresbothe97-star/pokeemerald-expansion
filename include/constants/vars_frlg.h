@@ -108,7 +108,7 @@
 #define VAR_MAP_SCENE_ROUTE16                                                  0x405E
 #define VAR_MAP_SCENE_ROUTE23                                                  0x405F
 #define VAR_MAP_SCENE_SILPH_CO_11F                                             0x4060
-#define VAR_MAP_SCENE_PEWTER_CITY_MUSEUM_1F                                    0x4061
+#define VAR_MAP_SCENE_PEWTER_CITY_BEATBROCK                                   0x4061
 #define VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES                        0x4062
 #define VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F                                      0x4063
 #define VAR_MAP_SCENE_VICTORY_ROAD_1F                                          0x4064
@@ -156,8 +156,8 @@
 #define VAR_0x408C                 0x408C //Used in Tito's Secret Mon
 #define VAR_GYM_BOSS_START         0x408D
 #define VAR_GYM_BLOCK_AND_SAVE     0x408E
-#define VAR_0x408F                 0x408F
-#define VAR_0x4090                 0x4090
+#define VAR_MUSEUM_ROCKET_SCENE    0x408F
+#define VAR_TITOS_ARCHEOLOGY_ARC   0x4090
 #define VAR_0x4091                 0x4091
 #define VAR_0x4092                 0x4092
 #define VAR_0x4093                 0x4093

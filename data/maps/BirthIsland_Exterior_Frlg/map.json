@@ -3,7 +3,6 @@
   "name": "BirthIsland_Exterior_Frlg",
   "layout": "LAYOUT_BIRTH_ISLAND_EXTERIOR_FRLG",
   "music": "MUS_NONE",
-  "region": "REGION_KANTO",
   "region_map_section": "MAPSEC_BIRTH_ISLAND_FRLG",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -14,14 +13,14 @@
   "show_map_name": true,
   "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "local_id": "LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_METEORITE",
-      "x": 15,
-      "y": 12,
+      "x": 13,
+      "y": 4,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
@@ -35,7 +34,7 @@
       "local_id": "LOCALID_BIRTH_ISLAND_DEOXYS",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
-      "x": 15,
+      "x": 13,
       "y": 3,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -45,21 +44,32 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
       "flag": "FLAG_HIDE_DEOXYS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_MR_BRINEYS_BOAT",
+      "x": 29,
+      "y": 28,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "0"
     }
   ],
   "warp_events": [
     {
-      "x": 15,
-      "y": 24,
+      "x": 29,
+      "y": 29,
       "elevation": 3,
       "dest_map": "MAP_BIRTH_ISLAND_HARBOR_FRLG",
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [
-
-  ],
-  "bg_events": [
-
-  ]
+  "coord_events": [],
+  "bg_events": [],
+  "region": "REGION_KANTO"
 }

@@ -67,8 +67,8 @@ MtMoon_1F_Text_JoshDefeat::
 	.string "It's so uncool.$"
 
 MtMoon_1F_Text_JoshPostBattle::
-	.string "I came all the way down here to\n"
-	.string "show off to girls.$"
+	.string "I saw a couple of Rockets below.\n"
+	.string "Watch out. Those guys are strong.$"
 
 MtMoon_1F_Text_MiriamIntro::
 	.string "Wow! It's way bigger in here than\n"

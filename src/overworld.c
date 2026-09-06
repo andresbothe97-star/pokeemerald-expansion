@@ -396,6 +396,7 @@ void DoWhiteOut(void)
     if(FlagGet(FLAG_SYS_GYM_MODE) == TRUE){
         FlagClear(FLAG_SYS_GYM_MODE);
     }
+    RemoveBagItem(ITEM_GYM_CANDY, CountTotalItemQuantityInBag(ITEM_GYM_CANDY));
     HealPlayerParty();
     Overworld_ResetStateAfterWhiteOut();
     SetWarpDestinationToLastHealLocation();

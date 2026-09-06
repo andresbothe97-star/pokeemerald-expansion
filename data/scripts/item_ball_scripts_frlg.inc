@@ -71,7 +71,7 @@ SSAnne_2F_Room2_EventScript_ItemStardust::
 	end
 
 SSAnne_2F_Room4_EventScript_ItemXAttack::
-	finditem ITEM_X_ATTACK
+	finditem ITEM_CARBOS
 	end
 
 SSAnne_B1F_Room2_EventScript_ItemTM44::
@@ -103,7 +103,7 @@ RocketHideout_B1F_EventScript_ItemHyperPotion::
 	end
 
 RocketHideout_B2F_EventScript_ItemXSpeed::
-	finditem ITEM_X_SPEED
+	finditem ITEM_CALCIUM
 	end
 
 RocketHideout_B2F_EventScript_ItemMoonStone::
@@ -163,7 +163,7 @@ PokemonTower_6F_EventScript_ItemRareCandy::
 	end
 
 PokemonTower_6F_EventScript_ItemXAccuracy::
-	finditem ITEM_X_ACCURACY
+	finditem ITEM_HP_UP
 	end
 
 Route12_EventScript_ItemTM48::
@@ -219,7 +219,7 @@ SafariZone_West_EventScript_ItemMaxPotion::
 	end
 
 SafariZone_West_EventScript_ItemMaxRevive::
-	finditem ITEM_MAX_REVIVE
+	finditem ITEM_MAX_POTION
 	end
 
 SilphCo_3F_EventScript_ItemHyperPotion::
@@ -227,7 +227,7 @@ SilphCo_3F_EventScript_ItemHyperPotion::
 	end
 
 SilphCo_4F_EventScript_ItemMaxRevive::
-	finditem ITEM_MAX_REVIVE
+	finditem ITEM_MAX_POTION
 	end
 
 SilphCo_4F_EventScript_ItemEscapeRope::
@@ -255,7 +255,7 @@ SilphCo_6F_EventScript_ItemHPUp::
 	end
 
 SilphCo_6F_EventScript_ItemXSpecial::
-	finditem ITEM_X_SPECIAL
+	finditem ITEM_PROTEIN
 	end
 
 SilphCo_7F_EventScript_ItemCalcium::
@@ -359,7 +359,7 @@ VictoryRoad_2F_EventScript_ItemTM37::
 	end
 
 VictoryRoad_3F_EventScript_ItemMaxRevive::
-	finditem ITEM_MAX_REVIVE
+	finditem ITEM_MAX_POTION
 	end
 
 VictoryRoad_3F_EventScript_ItemTM50::
@@ -391,7 +391,7 @@ CeruleanCave_2F_EventScript_ItemUltraBall::
 	end
 
 CeruleanCave_B1F_EventScript_ItemMaxRevive::
-	finditem ITEM_MAX_REVIVE
+	finditem ITEM_MAX_POTION
 	end
 
 CeruleanCave_B1F_EventScript_ItemUltraBall::
@@ -403,7 +403,7 @@ FuchsiaCity_WardensHouse_EventScript_ItemRareCandy::
 	end
 
 TwoIsland_EventScript_ItemRevive::
-	finditem ITEM_REVIVE
+	finditem ITEM_SUPER_POTION
 	end
 
 ThreeIsland_EventScript_ItemZinc::
@@ -415,7 +415,7 @@ ViridianForest_EventScript_ItemPotion2::
 	end
 
 MtMoon_B2F_EventScript_ItemRevive::
-	finditem ITEM_REVIVE
+	finditem ITEM_SUPER_POTION
 	end
 
 MtMoon_B2F_EventScript_ItemAntidote::
@@ -423,7 +423,7 @@ MtMoon_B2F_EventScript_ItemAntidote::
 	end
 
 Route11_EventScript_ItemXDefend::
-	finditem ITEM_X_DEFEND
+	finditem ITEM_PROTEIN
 	end
 
 Route9_EventScript_ItemBurnHeal::
@@ -443,7 +443,7 @@ RockTunnel_1F_EventScript_ItemEscapeRope::
 	end
 
 RockTunnel_B1F_EventScript_ItemRevive::
-	finditem ITEM_REVIVE
+	finditem ITEM_SUPER_POTION
 	end
 
 RockTunnel_B1F_EventScript_ItemMaxEther::
@@ -507,7 +507,7 @@ SeafoamIslands_B1F_EventScript_ItemWaterStone::
 	end
 
 SeafoamIslands_B1F_EventScript_ItemRevive::
-	finditem ITEM_REVIVE
+	finditem ITEM_SUPER_POTION
 	end
 
 SeafoamIslands_B2F_EventScript_ItemBigPearl::
@@ -655,7 +655,7 @@ FiveIsland_LostCave_Room12_EventScript_ItemSeaIncense::
 	end
 
 FiveIsland_LostCave_Room13_EventScript_ItemMaxRevive::
-	finditem ITEM_MAX_REVIVE
+	finditem ITEM_MAX_POTION
 	end
 
 FiveIsland_LostCave_Room14_EventScript_ItemRareCandy::

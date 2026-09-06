@@ -38,6 +38,10 @@ SSAnne_2F_Corridor_EventScript_RivalTrigger::
 	call_if_eq VAR_STARTER_MON, 1, SSAnne_2F_Corridor_EventScript_RivalBulbasaur
 	call_if_eq VAR_STARTER_MON, 0, SSAnne_2F_Corridor_EventScript_RivalCharmander
 	msgbox SSAnne_2F_Corridor_Text_RivalPostBattle
+	giveitem ITEM_HM01, 1
+	playse MUS_RG_OBTAIN_KEY_ITEM
+	setflag FLAG_GOT_HM01
+	setvar VAR_MAP_SCENE_VERMILION_CITY, 1
 	closemessage
 	delay 10
 	playbgm MUS_RG_RIVAL_EXIT, 0
@@ -177,18 +181,13 @@ SSAnne_2F_Corridor_Text_ThisShipIsLuxuryLiner::
 SSAnne_2F_Corridor_Text_RivalIntro::
 	.string "{RIVAL}: Bonjour!\n"
 	.string "{PLAYER}!\p"
-	.string "Imagine seeing you here!\n"
-	.string "{PLAYER}, were you really invited?\p"
-	.string "So how's your POKéDEX coming?\p"
-	.string "I already caught 40 kinds, pal.\n"
-	.string "Different kinds are everywhere.\p"
-	.string "Crawl around in grassy areas, and\n"
-	.string "look hard for them.$"
+	.string "Imagine seeing you here!\p"
+	.string "Check out these Pokémon I caught!$"
 
 SSAnne_2F_Corridor_Text_RivalDefeat::
-	.string "Humph!\p"
-	.string "At least you're raising your\n"
-	.string "POKéMON!$"
+	.string "Nice!\p"
+	.string "You're raising your\n"
+	.string "POKéMON really well!$"
 
 SSAnne_2F_Corridor_Text_RivalVictory::
 	.string "{PLAYER}..！\n"
@@ -199,9 +198,6 @@ SSAnne_2F_Corridor_Text_RivalVictory::
 SSAnne_2F_Corridor_Text_RivalPostBattle::
 	.string "{RIVAL}: I heard there was a CUT\n"
 	.string "master on board.\p"
-	.string "But he was just a seasick old man!\p"
-	.string "CUT itself is really useful.\n"
-	.string "Yup, it'll be handy.\p"
-	.string "You should go see him, too.\n"
-	.string "Smell ya!$"
+	.string "I foundan extra Cut HM\p"
+	.string "You can have it if you want!$"
 
